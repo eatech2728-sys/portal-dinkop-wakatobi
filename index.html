@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beranda — Dinas Koperasi, UKM dan Tenaga Kerja Kab. Wakatobi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue-deep:#0B3D74;
+    --blue:#0F5FA6;
+    --blue-mid:#1673C4;
+    --blue-soft:#EAF3FC;
+    --blue-line:#CFE0F2;
+    --white:#FFFFFF;
+    --ink:#1D2530;
+    --ink-soft:#5B6672;
+    --line:#DCE6F0;
+    --red:#C1272D;
+    --ok:#1F7A4D;
+    --gold:#B8892B;
+    --radius:10px;
+    --shadow: 0 1px 2px rgba(11,61,116,.05), 0 8px 24px -12px rgba(11,61,116,.20);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    position:relative;
+    background-image:
+      linear-gradient(180deg, rgba(234,243,252,.94) 0%, rgba(246,250,254,.94) 260px, rgba(246,250,254,.94) 100%);
+    background-repeat:no-repeat;
+    background-position:top center;
+    background-size:100% auto;
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:url('background1.png');
+    background-size:cover;
+    background-position:top center;
+    background-repeat:no-repeat;
+    filter:blur(6px);
+    transform:scale(1.05);
+    z-index:-1;
+  }
+
+  .wrap{max-width:1180px; margin:0 auto; padding: 0 18px 80px; position:relative; z-index:1;}
+  a{color:inherit;}
+
+  /* ---------- TOP BAR ---------- */
+  .topbar{
+    background:var(--blue-deep);
+    color:#fff; font-size:11.5px; letter-spacing:.04em;
+    padding:7px 0; text-align:center;
+  }
+  .topbar strong{font-weight:700;}
+
+  /* ---------- LETTERHEAD (KOP SURAT) ---------- */
+  .letterhead-block{
+    position:relative; max-width:1180px; margin:22px auto 0; padding:26px 24px;
+    background-image:
+      linear-gradient(135deg, rgba(11,61,116,.55) 0%, rgba(15,95,166,.46) 100%),
+      url('sampul_dinkop.jpg');
+    background-size:cover; background-position:center;
+    border-radius:12px; box-shadow:var(--shadow); overflow:hidden;
+    min-height:140px; display:flex; align-items:center;
+  }
+  .letterhead{
+    position:relative; z-index:1;
+    display:flex; align-items:center; gap:16px;
+  }
+  .letterhead .logo{
+    flex:0 0 auto; width:64px; height:64px; object-fit:contain;
+    background:#fff; border-radius:50%; padding:6px; box-shadow:0 2px 6px rgba(0,0,0,.15);
+  }
+  .letterhead .agency-text{flex:1; min-width:0;}
+  .agency-line1{
+    font-weight:800; font-size:clamp(15px,2.4vw,19px); color:#fff;
+    letter-spacing:.02em; text-transform:uppercase; margin:0 0 2px;
+    text-shadow:0 1px 4px rgba(0,0,0,.55), 0 1px 10px rgba(0,0,0,.35);
+  }
+  .agency-line2{
+    font-weight:700; font-size:clamp(13px,2vw,16px); color:#EAF3FC;
+    text-transform:uppercase; margin:0; letter-spacing:.01em;
+    text-shadow:0 1px 4px rgba(0,0,0,.55), 0 1px 10px rgba(0,0,0,.35);
+  }
+  .letterhead-rule{border:none; height:1px; background:var(--blue-line); margin:0;}
+  .letterhead-rule.thick{height:4px; background:var(--blue-deep); margin-top:2px;}
+
+  /* ---------- MAIN NAV ---------- */
+  .main-nav{
+    position:sticky; top:0; z-index:30;
+    background:rgba(255,255,255,.92); backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--blue-line);
+    box-shadow:0 2px 10px rgba(11,61,116,.06);
+  }
+  .main-nav-inner{
+    max-width:1180px; margin:0 auto; padding:0 18px;
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    height:54px;
+  }
+  .nav-brand{font-weight:800; font-size:13.5px; color:var(--blue-deep); letter-spacing:.01em; white-space:nowrap;}
+  .nav-links{display:flex; gap:4px; flex-wrap:wrap;}
+  .nav-links a{
+    text-decoration:none; font-size:13px; font-weight:600; color:var(--ink);
+    padding:8px 12px; border-radius:7px; transition:background .15s, color .15s;
+  }
+  .nav-links a:hover{background:var(--blue-soft); color:var(--blue-deep);}
+  .nav-links a.current{background:var(--blue-deep); color:#fff;}
+  @media (max-width:720px){
+    .main-nav-inner{flex-direction:column; height:auto; padding:10px 18px;}
+    .nav-links{justify-content:center;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    margin-top:26px; border-radius:14px; overflow:hidden; position:relative;
+    box-shadow:var(--shadow); min-height:340px; display:flex; align-items:flex-end;
+    background-image:
+      linear-gradient(0deg, rgba(8,44,85,.90) 0%, rgba(11,61,116,.55) 55%, rgba(11,61,116,.30) 100%),
+      url('background1.png');
+    background-size:cover; background-position:center 15%;
+  }
+  .hero-inner{position:relative; z-index:1; padding:34px 30px 30px; color:#fff; max-width:760px;}
+  .hero-eyebrow{
+    display:inline-block; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.14em;
+    text-transform:uppercase; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.35);
+    padding:5px 12px; border-radius:999px; margin-bottom:14px;
+  }
+  .hero h1{
+    margin:0 0 12px; font-weight:800; font-size:clamp(24px,4vw,36px); line-height:1.18;
+    text-shadow:0 2px 10px rgba(0,0,0,.35);
+  }
+  .hero p{margin:0; font-size:15px; line-height:1.6; color:#EAF3FC; max-width:60ch;}
+  .hero-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:20px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; text-decoration:none;
+    font-weight:700; font-size:13.5px; padding:11px 20px; border-radius:8px;
+    transition:filter .15s, transform .08s;
+  }
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:#fff; color:var(--blue-deep);}
+  .btn-primary:hover{filter:brightness(.96);}
+  .btn-ghost{background:rgba(255,255,255,.10); color:#fff; border:1.5px solid rgba(255,255,255,.55);}
+  .btn-ghost:hover{background:rgba(255,255,255,.2);}
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section{margin-top:52px;}
+  .section-head{display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:20px; flex-wrap:wrap;}
+  .section-eyebrow{
+    font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--blue); margin:0 0 6px;
+  }
+  .section-title{margin:0; font-size:clamp(20px,2.6vw,26px); font-weight:800; color:var(--blue-deep);}
+  .section-sub{margin:6px 0 0; color:var(--ink-soft); font-size:13.5px; max-width:60ch;}
+  .section-link{font-size:13px; font-weight:700; color:var(--blue); text-decoration:none; white-space:nowrap;}
+  .section-link:hover{text-decoration:underline;}
+
+  /* ---------- BIDANG CARDS ---------- */
+  .bidang-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:900px){ .bidang-grid{grid-template-columns:1fr;} }
+  .bidang-card{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius);
+    padding:24px 22px 22px; box-shadow:var(--shadow); display:flex; flex-direction:column;
+    text-decoration:none; color:var(--ink); transition:transform .15s, box-shadow .15s;
+  }
+  .bidang-card:hover{transform:translateY(-3px); box-shadow:0 12px 28px -12px rgba(11,61,116,.30);}
+  .bidang-icon{
+    width:46px; height:46px; border-radius:10px; background:var(--blue-soft); color:var(--blue-deep);
+    display:flex; align-items:center; justify-content:center; margin-bottom:16px; font-size:22px;
+  }
+  .bidang-card h3{margin:0 0 8px; font-size:16.5px; font-weight:700; color:var(--blue-deep);}
+  .bidang-card p{margin:0 0 14px; font-size:13px; color:var(--ink-soft); line-height:1.55; flex:1;}
+  .bidang-tags{display:flex; flex-direction:column; gap:6px; margin-bottom:16px;}
+  .bidang-tag{
+    display:flex; align-items:center; gap:8px; font-size:12px; color:var(--ink);
+    background:#F9FBFD; border:1px solid var(--line); border-radius:6px; padding:7px 10px;
+  }
+  .bidang-tag .dot{width:6px; height:6px; border-radius:50%; background:var(--blue); flex:0 0 auto;}
+  .bidang-card .card-cta{
+    font-size:13px; font-weight:700; color:var(--blue-deep); display:flex; align-items:center; gap:6px;
+  }
+  .bidang-card .card-cta svg{width:14px; height:14px; transition:transform .15s;}
+  .bidang-card:hover .card-cta svg{transform:translateX(3px);}
+
+  /* ---------- BERITA / KEGIATAN ---------- */
+  .berita-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:900px){ .berita-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:640px){ .berita-grid{grid-template-columns:1fr;} }
+  .berita-card{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;
+    box-shadow:var(--shadow); text-decoration:none; color:var(--ink); display:flex; flex-direction:column;
+    transition:transform .15s, box-shadow .15s;
+  }
+  .berita-card:hover{transform:translateY(-3px); box-shadow:0 12px 28px -12px rgba(11,61,116,.30);}
+  .berita-thumb{
+    height:150px; background:var(--blue-soft) center/cover no-repeat;
+    display:flex; align-items:flex-end; padding:10px;
+  }
+  .berita-source{
+    font-size:10.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase;
+    padding:4px 9px; border-radius:999px; color:#fff;
+  }
+  .src-instagram{background:linear-gradient(135deg,#F58529,#DD2A7B,#8134AF);}
+  .src-facebook{background:#1877F2;}
+  .src-website{background:var(--blue-deep);}
+  .berita-body{padding:14px 16px 16px; display:flex; flex-direction:column; gap:6px; flex:1;}
+  .berita-date{font-size:11px; color:var(--ink-soft); font-family:'Space Mono',monospace;}
+  .berita-title{font-size:14px; font-weight:700; color:var(--ink); line-height:1.4; margin:0;}
+  .berita-excerpt{font-size:12.5px; color:var(--ink-soft); line-height:1.5; margin:0; flex:1;}
+  .berita-readmore{font-size:12px; font-weight:700; color:var(--blue); margin-top:4px;}
+
+  .berita-note{
+    margin-top:16px; font-size:12px; color:var(--ink-soft); background:#F9FBFD;
+    border:1px dashed var(--line); border-radius:8px; padding:10px 14px;
+  }
+
+  /* ---------- FOOTER (sama dengan halaman lain) ---------- */
+  .site-footer{position:relative; z-index:1; margin-top:60px; background:var(--blue-deep); color:#EAF3FC;}
+  .site-footer .footer-inner{
+    max-width:1180px; margin:0 auto; padding:36px 24px 22px;
+    display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:28px;
+  }
+  @media (max-width:720px){ .site-footer .footer-inner{grid-template-columns:1fr; gap:26px;} }
+  .footer-col h4{
+    margin:0 0 12px; font-size:13px; font-weight:700; text-transform:uppercase;
+    letter-spacing:.06em; color:#fff; padding-bottom:8px; border-bottom:1px solid rgba(255,255,255,.18);
+  }
+  .footer-col p{margin:0 0 6px; font-size:13px; line-height:1.6; color:#CFE0F2;}
+  .footer-col a{color:#CFE0F2; text-decoration:none;}
+  .footer-col a:hover{color:#fff; text-decoration:underline;}
+  .footer-contact-item{display:flex; gap:8px; align-items:flex-start; margin-bottom:8px; font-size:13px; color:#CFE0F2;}
+  .footer-contact-item svg{flex:0 0 auto; width:16px; height:16px; margin-top:1px; color:#8FB8E0;}
+  .footer-social{display:flex; flex-direction:column; gap:8px;}
+  .footer-social a{
+    display:flex; align-items:center; gap:8px; font-size:13px; font-weight:600;
+    padding:7px 10px; border-radius:6px; background:rgba(255,255,255,.06);
+    transition:background .15s;
+  }
+  .footer-social a:hover{background:rgba(255,255,255,.14); text-decoration:none;}
+  .footer-bottom{
+    border-top:4px solid #082C55; background:#082C55;
+    text-align:center; padding:12px 18px; font-size:11.5px; color:#9FBBDA; letter-spacing:.02em;
+  }
+  .footer-bottom strong{color:#fff;}
+</style>
+</head>
+<body>
+
+<div class="topbar"><strong>PEMERINTAH KABUPATEN WAKATOBI</strong> — Layanan Ketenagakerjaan Daring</div>
+
+<div class="letterhead-block">
+  <div class="letterhead">
+    <img class="logo" src="logo-wakatobi.png" alt="Logo Pemerintah Kabupaten Wakatobi">
+    <div class="agency-text">
+      <p class="agency-line1">Pemerintah Kabupaten Wakatobi</p>
+      <p class="agency-line2">Dinas Koperasi, Usaha Kecil Menengah dan Tenaga Kerja</p>
+    </div>
+  </div>
+</div>
+<hr class="letterhead-rule">
+<hr class="letterhead-rule thick">
+
+<!-- NAVIGASI UTAMA -->
+<nav class="main-nav">
+  <div class="main-nav-inner">
+    <span class="nav-brand">DINKOP UKM &amp; NAKER WAKATOBI</span>
+    <div class="nav-links">
+      <a href="index.html" class="current">Beranda</a>
+      <a href="bidang-tenaga-kerja/index.html">Bidang Tenaga Kerja</a>
+      <a href="bidang-ukm/index.html">Bidang UKM</a>
+      <a href="bidang-koperasi/index.html">Bidang Koperasi/Kelembagaan</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="hero-eyebrow">Melayani Masyarakat Wakatobi</span>
+      <h1>Mendukung Koperasi, UKM, dan Tenaga Kerja Wakatobi Naik Kelas</h1>
+      <p>Portal layanan daring Dinas Koperasi, Usaha Kecil Menengah dan Tenaga Kerja Kabupaten Wakatobi — mulai dari registrasi kartu pencari kerja, rekomendasi keberangkatan pekerja migran, hingga pembinaan koperasi dan UKM di seluruh kecamatan.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="bidang-tenaga-kerja/index.html">Lihat Layanan Tenaga Kerja</a>
+        <a class="btn btn-ghost" href="#berita">Kegiatan Terbaru</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BIDANG -->
+  <section class="section" id="bidang">
+    <div class="section-head">
+      <div>
+        <p class="section-eyebrow">Struktur Layanan</p>
+        <h2 class="section-title">Tiga Bidang, Satu Tujuan</h2>
+        <p class="section-sub">Dinas Koperasi, UKM dan Tenaga Kerja terbagi dalam tiga bidang yang melayani kebutuhan masyarakat sesuai fokusnya masing-masing.</p>
+      </div>
+    </div>
+
+    <div class="bidang-grid">
+
+      <a class="bidang-card" href="bidang-tenaga-kerja/index.html">
+        <div class="bidang-icon">👷</div>
+        <h3>Bidang Tenaga Kerja</h3>
+        <p>Layanan seputar pencari kerja, pekerja migran, dan jaminan sosial ketenagakerjaan.</p>
+        <div class="bidang-tags">
+          <div class="bidang-tag"><span class="dot"></span>Registrasi &amp; Cetak Kartu AK-1</div>
+          <div class="bidang-tag"><span class="dot"></span>Rekomendasi Paspor CPMI</div>
+          <div class="bidang-tag"><span class="dot"></span>Layanan BPJS Ketenagakerjaan</div>
+        </div>
+        <span class="card-cta">Lihat Layanan
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="bidang-card" href="bidang-ukm/index.html">
+        <div class="bidang-icon">🛍️</div>
+        <h3>Bidang Usaha Kecil Menengah</h3>
+        <p>Pendampingan, pembinaan, dan fasilitasi pelaku usaha kecil dan menengah di Wakatobi.</p>
+        <div class="bidang-tags">
+          <div class="bidang-tag"><span class="dot"></span>Layanan segera hadir</div>
+        </div>
+        <span class="card-cta">Lihat Layanan
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+      <a class="bidang-card" href="bidang-koperasi/index.html">
+        <div class="bidang-icon">🤝</div>
+        <h3>Bidang Koperasi/Kelembagaan</h3>
+        <p>Pembinaan kelembagaan koperasi, legalitas, dan penguatan tata kelola koperasi.</p>
+        <div class="bidang-tags">
+          <div class="bidang-tag"><span class="dot"></span>Layanan segera hadir</div>
+        </div>
+        <span class="card-cta">Lihat Layanan
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- BERITA / KEGIATAN -->
+  <section class="section" id="berita">
+    <div class="section-head">
+      <div>
+        <p class="section-eyebrow">Aktivitas Kantor</p>
+        <h2 class="section-title">Kegiatan &amp; Berita Terbaru</h2>
+        <p class="section-sub">Ringkasan kegiatan yang juga dibagikan melalui media sosial resmi kantor.</p>
+      </div>
+      <a class="section-link" href="https://instagram.com/dinkop_ukm_naker_wakatobi" target="_blank">Lihat Semua di Instagram →</a>
+    </div>
+
+    <div class="berita-grid" id="beritaGrid"></div>
+
+    <p class="berita-note">Catatan: kartu di atas diisi dari daftar <code>beritaData</code> pada bagian akhir halaman ini. Tambahkan/edit kegiatan di sana setiap kali ada unggahan baru di sosial media kantor. Integrasi otomatis (sinkron langsung dari Instagram/Facebook) bisa ditambahkan kemudian jika akun media sosial kantor sudah siap dihubungkan.</p>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>Tentang Instansi</h4>
+      <p><strong>Dinas Koperasi, Usaha Kecil Menengah dan Tenaga Kerja</strong><br>Pemerintah Kabupaten Wakatobi</p>
+      <p>Jl. Poros Liya, Desa Liya One Melangka, Kecamatan Wangi-Wangi Selatan, Kabupaten Wakatobi, Sulawesi Tenggara</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Kontak Layanan</h4>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>0821-9746-2749 (WhatsApp Admin)</span>
+      </div>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" stroke="none"/><path d="M22 6l-10 7L2 6" /><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+        <span>dinkopukmnaker@wakatobikab.go.id</span>
+      </div>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span>Senin–Jumat, 08.00–16.00 WITA</span>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Ikuti Kami</h4>
+      <div class="footer-social">
+        <a href="https://wa.me/6282197462749" target="_blank">🟢 WhatsApp Admin</a>
+        <a href="https://instagram.com/dinkop_ukm_naker_wakatobi" target="_blank">📸 Instagram</a>
+        <a href="https://facebook.com/share/19CRYqovn4/?mibextid=wwXXlfr" target="_blank">🔵 Facebook</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; <span id="footerYear"></span> <strong>Dinas Koperasi, UKM dan Tenaga Kerja Kabupaten Wakatobi</strong>. Seluruh hak cipta dilindungi.
+  </div>
+</footer>
+
+<script>
+  // ---------------------------------------------------------------
+  // DAFTAR BERITA / KEGIATAN
+  // Edit array di bawah ini setiap kali ada kegiatan/unggahan baru.
+  // 'sumber' menentukan warna label: 'instagram' | 'facebook' | 'website'
+  // ---------------------------------------------------------------
+  const beritaData = [
+    {
+      tanggal: "20 Jul 2026",
+      judul: "Pelatihan Pengolahan Ikan bagi Kelompok UKM Kaledupa",
+      ringkasan: "Dinas memberikan pendampingan teknis pengolahan hasil laut untuk pelaku usaha kecil di Kecamatan Kaledupa.",
+      sumber: "instagram",
+      tautan: "https://instagram.com/dinkop_ukm_naker_wakatobi",
+      gambar: ""
+    },
+    {
+      tanggal: "14 Jul 2026",
+      judul: "Sosialisasi Prosedur Rekomendasi Paspor CPMI",
+      ringkasan: "Sosialisasi alur pengurusan rekomendasi paspor bagi calon pekerja migran Indonesia asal Wakatobi.",
+      sumber: "facebook",
+      tautan: "https://facebook.com/share/19CRYqovn4/?mibextid=wwXXlfr",
+      gambar: ""
+    },
+    {
+      tanggal: "05 Jul 2026",
+      judul: "Verifikasi Kelembagaan Koperasi di Kecamatan Tomia",
+      ringkasan: "Tim bidang Koperasi/Kelembagaan melakukan verifikasi tata kelola koperasi aktif di wilayah Tomia.",
+      sumber: "website",
+      tautan: "#",
+      gambar: ""
+    }
+  ];
+
+  const sourceLabel = { instagram: "Instagram", facebook: "Facebook", website: "Website Dinas" };
+  const sourceClass = { instagram: "src-instagram", facebook: "src-facebook", website: "src-website" };
+
+  function renderBerita() {
+    const grid = document.getElementById('beritaGrid');
+    grid.innerHTML = beritaData.map(item => `
+      <a class="berita-card" href="${item.tautan}" target="${item.tautan.startsWith('http') ? '_blank' : '_self'}">
+        <div class="berita-thumb" style="${item.gambar ? `background-image:url('${item.gambar}')` : ''}">
+          <span class="berita-source ${sourceClass[item.sumber] || 'src-website'}">${sourceLabel[item.sumber] || 'Website'}</span>
+        </div>
+        <div class="berita-body">
+          <span class="berita-date">${item.tanggal}</span>
+          <p class="berita-title">${item.judul}</p>
+          <p class="berita-excerpt">${item.ringkasan}</p>
+          <span class="berita-readmore">Baca selengkapnya →</span>
+        </div>
+      </a>
+    `).join('');
+  }
+  renderBerita();
+
+  document.getElementById('footerYear').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
