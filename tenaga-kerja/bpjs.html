@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Layanan BPJS Ketenagakerjaan — Dinas Koperasi, UKM dan Tenaga Kerja Kab. Wakatobi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue-deep:#0B3D74;
+    --blue:#0F5FA6;
+    --blue-mid:#1673C4;
+    --blue-soft:#EAF3FC;
+    --blue-line:#CFE0F2;
+    --white:#FFFFFF;
+    --ink:#1D2530;
+    --ink-soft:#5B6672;
+    --line:#DCE6F0;
+    --red:#C1272D;
+    --ok:#1F7A4D;
+    --radius:10px;
+    --shadow: 0 1px 2px rgba(11,61,116,.05), 0 8px 24px -12px rgba(11,61,116,.20);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    position:relative;
+    background-image:
+      linear-gradient(180deg, rgba(234,243,252,.88) 0%, rgba(246,250,254,.88) 260px, rgba(246,250,254,.88) 100%);
+    background-repeat:no-repeat;
+    background-position:top center;
+    background-size:100% auto;
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:url('../assets/img/background1.png');
+    background-size:cover;
+    background-position:top center;
+    background-repeat:no-repeat;
+    filter:blur(6px);
+    transform:scale(1.05);
+    z-index:-1;
+  }
+
+  .wrap{max-width:1180px; margin:0 auto; padding: 0 18px 80px; position:relative; z-index:1;}
+  a{color:inherit;}
+
+  /* ---------- TOP BAR ---------- */
+  .topbar{background:var(--blue-deep); color:#fff; font-size:11.5px; letter-spacing:.04em; padding:7px 0; text-align:center;}
+  .topbar strong{font-weight:700;}
+
+  /* ---------- LETTERHEAD ---------- */
+  .letterhead-block{
+    position:relative; max-width:1180px; margin:22px auto 0; padding:26px 24px;
+    background-image:
+      linear-gradient(135deg, rgba(11,61,116,.55) 0%, rgba(15,95,166,.46) 100%),
+      url('../assets/img/sampul_dinkop.jpg');
+    background-size:cover; background-position:center;
+    border-radius:12px; box-shadow:var(--shadow); overflow:hidden;
+    min-height:140px; display:flex; align-items:center;
+  }
+  .letterhead{position:relative; z-index:1; display:flex; align-items:center; gap:16px;}
+  .letterhead .logo{
+    flex:0 0 auto; width:64px; height:64px; object-fit:contain;
+    background:#fff; border-radius:50%; padding:6px; box-shadow:0 2px 6px rgba(0,0,0,.15);
+  }
+  .letterhead .agency-text{flex:1; min-width:0;}
+  .agency-line1{
+    font-weight:800; font-size:clamp(15px,2.4vw,19px); color:#fff;
+    letter-spacing:.02em; text-transform:uppercase; margin:0 0 2px;
+    text-shadow:0 1px 4px rgba(0,0,0,.55), 0 1px 10px rgba(0,0,0,.35);
+  }
+  .agency-line2{
+    font-weight:700; font-size:clamp(13px,2vw,16px); color:#EAF3FC;
+    text-transform:uppercase; margin:0; letter-spacing:.01em;
+    text-shadow:0 1px 4px rgba(0,0,0,.55), 0 1px 10px rgba(0,0,0,.35);
+  }
+  .letterhead-rule{border:none; height:1px; background:var(--blue-line); margin:0;}
+  .letterhead-rule.thick{height:4px; background:var(--blue-deep); margin-top:2px;}
+
+  /* ---------- MAIN NAV & BREADCRUMB ---------- */
+  .main-nav{
+    position:sticky; top:0; z-index:30;
+    background:rgba(255,255,255,.92); backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--blue-line);
+    box-shadow:0 2px 10px rgba(11,61,116,.06);
+  }
+  .main-nav-inner{
+    max-width:1180px; margin:0 auto; padding:0 18px;
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    height:54px;
+  }
+  .nav-brand{font-weight:800; font-size:13.5px; color:var(--blue-deep); letter-spacing:.01em; white-space:nowrap;}
+  .nav-links{display:flex; gap:4px; flex-wrap:wrap;}
+  .nav-links a{
+    text-decoration:none; font-size:13px; font-weight:600; color:var(--ink);
+    padding:8px 12px; border-radius:7px; transition:background .15s, color .15s;
+  }
+  .nav-links a:hover{background:var(--blue-soft); color:var(--blue-deep);}
+  .breadcrumb{margin-top:18px; font-size:12.5px; color:var(--ink-soft); display:flex; align-items:center; gap:6px; flex-wrap:wrap;}
+  .breadcrumb a{color:var(--blue); text-decoration:none; font-weight:600;}
+  .breadcrumb a:hover{text-decoration:underline;}
+  .breadcrumb .sep{color:#AEC1D4;}
+  .breadcrumb .current{color:var(--ink); font-weight:600;}
+
+  /* ---------- TITLE ---------- */
+  .page-title{text-align:center; padding:26px 18px 6px;}
+  .page-title h1{
+    font-weight:800; font-size:clamp(22px,3.4vw,30px);
+    margin:0 0 8px; color:var(--blue-deep); letter-spacing:-.01em; line-height:1.15;
+  }
+  .page-title p{margin:0; color:var(--blue-deep); font-weight:600; font-size:14.5px; max-width:60ch; margin:0 auto;}
+
+  /* ---------- LAYOUT ---------- */
+  .layout{display:grid; grid-template-columns:220px 1fr; gap:28px; margin-top:26px;}
+  @media (max-width:860px){ .layout{grid-template-columns:1fr;} }
+
+  /* ---------- RAIL (desktop) ---------- */
+  .rail{position:sticky; top:64px; align-self:start; display:flex; flex-direction:column; gap:4px;}
+  @media (max-width:860px){ .rail{display:none;} }
+  .rail-title{font-family:'Space Mono',monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--blue-deep); font-weight:700; margin:0 0 10px 2px;}
+  .tab{display:flex; align-items:center; gap:10px; padding:14px 16px; border-radius:8px; cursor:pointer; text-decoration:none; color:var(--ink); border-left:4px solid transparent; transition:background .15s, border-color .15s;}
+  .tab:hover{background:var(--blue-soft);}
+  .tab.active{background-color:#EFF6FF; border-left-color:#2563EB;}
+  .tab.active .tab-label{ color:#1D4ED8; }
+  .tab.active .stamp-badge{ background-color:#2563EB; border-color:#2563EB; color:#fff;}
+  .tab.done{background-color:#F0FDF4; border-left-color:#16A34A;}
+  .tab.done .tab-label{ color:#15803D; }
+  .tab.done .tab-sub{ color:#166534; }
+  .stamp-badge{
+    position:relative; flex:0 0 auto; width:30px; height:30px; border-radius:50%;
+    border:2px solid var(--line); display:flex; align-items:center; justify-content:center;
+    font-family:'Space Mono',monospace; font-size:12px; font-weight:700; color:var(--ink-soft);
+    transition:all .35s cubic-bezier(.2,.8,.2,1); background:#fff;
+  }
+  .stamp-badge svg{position:absolute; top:50%; left:50%; width:15px; height:15px; opacity:0; transform:translate(-50%,-50%) scale(.4); transition:opacity .35s, transform .35s;}
+  .stamp-badge .num{display:block; width:100%; text-align:center; line-height:1; transition:opacity .25s;}
+  .tab.done .stamp-badge .num{opacity:0;}
+  .tab.done .stamp-badge svg{opacity:1; transform:translate(-50%,-50%) scale(1);}
+  .tab.done .stamp-badge{border-color:var(--blue); background:var(--blue); color:#fff; box-shadow:0 2px 6px rgba(15,95,166,.35);}
+  .tab-label{font-size:13.5px; font-weight:600; line-height:1.25;}
+  .tab-sub{font-size:11px; color:var(--ink-soft); font-weight:400;}
+
+  /* ---------- RAIL (mobile) ---------- */
+  .mobile-rail{display:none; position:sticky; top:54px; z-index:20; background:#F6FAFE; padding:10px 4px 14px; margin-bottom:4px;}
+  @media (max-width:860px){ .mobile-rail{display:flex; gap:8px; justify-content:space-between; border-bottom:1px solid var(--line);} }
+  .mobile-rail .m-tab{flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; text-decoration:none; color:var(--ink-soft);}
+  .mobile-rail .dot{width:22px; height:22px; border-radius:50%; border:2px solid var(--line); background:#fff; display:flex; align-items:center; justify-content:center; transition:all .3s;}
+  .mobile-rail .m-tab.done .dot{background:var(--blue); border-color:var(--blue);}
+  .mobile-rail .m-tab.done .dot::after{content:"✓"; color:#fff; font-size:11px; font-weight:700;}
+  .mobile-rail span.mlabel{font-size:9.5px; text-align:center; font-weight:600; letter-spacing:.01em;}
+
+  /* ---------- FORM SECTIONS ---------- */
+  .form-section{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius);
+    padding:22px 24px 26px; box-shadow:var(--shadow); margin-bottom:22px;
+    position:relative; scroll-margin-top:74px;
+  }
+  .sec-head{display:flex; align-items:center; gap:12px; margin-bottom:18px; padding-bottom:12px; border-bottom:1px solid var(--blue-line);}
+  .sec-num{
+    flex:0 0 auto; width:34px; height:34px; border-radius:50%; background:var(--blue-deep);
+    display:flex; align-items:center; justify-content:center; font-family:'Space Mono',monospace;
+    font-weight:700; color:#fff; font-size:14px;
+  }
+  .sec-title{font-weight:700; font-size:18px; color:var(--blue-deep); margin:0;}
+  .sec-hint{font-size:12px; color:var(--ink-soft); margin:2px 0 0;}
+
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media (max-width:640px){ .grid2{grid-template-columns:1fr;} }
+
+  .field{margin-bottom:2px;}
+  label{display:block; font-weight:600; font-size:12.5px; color:var(--blue-deep); margin-bottom:6px; letter-spacing:.01em;}
+  label .req{color:var(--red); font-weight:700;}
+  input[type="text"], input[type="date"], input[type="email"]{
+    width:100%; padding:11px 12px; border:1.5px solid var(--line); border-radius:7px;
+    background:#F9FBFD; font-family:'Inter',sans-serif; font-size:14px; color:var(--ink);
+    outline:none; transition: border-color .15s, box-shadow .15s, background .15s;
+  }
+  input[type="text"]::placeholder, input[type="date"]::placeholder{color:#9CAAB8;}
+  input:focus{border-color:var(--blue); background:#fff; box-shadow:0 0 0 3px rgba(15,95,166,.16);}
+
+  select, textarea{
+    width:100%; padding:11px 12px; border:1.5px solid var(--line); border-radius:7px;
+    background:#F9FBFD; font-family:'Inter',sans-serif; font-size:14px; color:var(--ink);
+    outline:none; transition: border-color .15s, box-shadow .15s, background .15s;
+  }
+  select:focus, textarea:focus{border-color:var(--blue); background:#fff; box-shadow:0 0 0 3px rgba(15,95,166,.16);}
+  textarea{resize:vertical; min-height:96px; font-family:'Inter',sans-serif;}
+  textarea::placeholder{color:#9CAAB8;}
+
+  .file-drop{
+    position:relative; border:1.5px dashed var(--line); border-radius:7px; background:#F9FBFD;
+    padding:10px 12px; transition:border-color .15s, background .15s; cursor:pointer;
+  }
+  .file-drop:hover{border-color:var(--blue);}
+  .file-drop input[type=file]{position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%;}
+  .file-drop-inner{display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--ink-soft); pointer-events:none;}
+  .file-drop-inner svg{flex:0 0 auto; width:16px; height:16px; color:var(--blue);}
+  .file-drop.filled{border-style:solid; border-color:var(--ok); background:#F1F9F4;}
+  .file-drop.filled .file-drop-inner{color:var(--ok); font-weight:600;}
+  .file-name{display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+
+  .divider-row{border-bottom:1px solid var(--blue-line); padding-bottom:18px; margin-bottom:18px;}
+  .divider-row:last-child{border-bottom:none; padding-bottom:0; margin-bottom:0;}
+
+  .checkbox-row{display:flex; align-items:flex-start; gap:10px; padding-top:6px;}
+  .checkbox-row input{width:18px; height:18px; margin-top:2px; accent-color:var(--blue); flex:0 0 auto;}
+  .checkbox-row span{font-size:13.5px; color:var(--ink); line-height:1.4;}
+
+  .info-note{
+    display:flex; gap:10px; background:#FFF7ED; border:1px solid #FCDBA6; color:#8A4B0A;
+    border-radius:8px; padding:12px 14px; font-size:12.5px; line-height:1.55; margin-bottom:18px;
+  }
+  .info-note svg{flex:0 0 auto; width:18px; height:18px; margin-top:1px;}
+
+  /* ---------- SUBMIT ---------- */
+  .submit-wrap{text-align:center; margin-top:6px;}
+  .stamp-btn{
+    appearance:none; border:none; cursor:pointer;
+    background:var(--blue-deep); color:#fff; font-family:'Inter',sans-serif;
+    font-weight:700; letter-spacing:.02em; font-size:14.5px;
+    padding:15px 34px; border-radius:8px; box-shadow:0 6px 0 #082C55, var(--shadow);
+    transition: transform .08s ease, box-shadow .08s ease; display:inline-flex; align-items:center; gap:10px;
+  }
+  .stamp-btn:hover{filter:brightness(1.06);}
+  .stamp-btn:active{transform:translateY(4px); box-shadow:0 2px 0 #082C55;}
+  .stamp-btn:disabled{background:#A9B4BF; box-shadow:0 6px 0 #8A939C; cursor:not-allowed;}
+  .stamp-btn svg{width:18px; height:18px;}
+  .loading-text{color:var(--blue-deep); font-weight:600; font-size:13px; margin-top:14px;}
+  .loading-text.hidden{display:none;}
+  .progress-note{font-size:12px; color:var(--ink-soft); margin-top:12px;}
+
+  @keyframes popIn{0%{opacity:0; transform:scale(.7);} 70%{opacity:1; transform:scale(1.05);} 100%{opacity:1; transform:scale(1);}}
+  .stamp-overlay{
+    position:fixed; inset:0; background:rgba(11,61,116,.35); z-index:100;
+    display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .2s;
+  }
+  .stamp-overlay.show{opacity:1; pointer-events:auto;}
+  .stamp-graphic{
+    width:190px; height:190px; border-radius:8px; border:4px double var(--red); color:var(--red); padding:12px 20px;
+    display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center;
+    background:#fff; animation: popIn .5s cubic-bezier(.2,.9,.25,1.2) both; transform:rotate(-4deg);
+  }
+  .stamp-graphic strong{font-size:20px; letter-spacing:2px; display:block; font-weight:800;}
+  .stamp-graphic span{font-size:10px; letter-spacing:.1em; margin-top:4px; font-weight:700; border-top:2px solid var(--red); border-bottom:2px solid var(--red); padding:2px 0;}
+  .stamp-graphic small{font-size:12px; margin-top:6px; font-weight:700;}
+
+  @media (prefers-reduced-motion: reduce){ *{animation-duration:.001ms !important; transition-duration:.001ms !important;} }
+
+  /* ---------- Notifikasi sukses ---------- */
+  .permanent-notification-wrapper{
+    position:fixed; top:30px; right:30px; z-index:9999; width:320px;
+    display:none; flex-direction:column; align-items:center; gap:15px;
+    background:#fff; padding:25px 15px 15px; border-radius:8px;
+    box-shadow:0 10px 30px rgba(0,0,0,.2); box-sizing:border-box;
+  }
+  .permanent-notification-wrapper.show{ display:flex; }
+  .close-x-btn{position:absolute; top:5px; right:10px; background:none; border:none; font-size:24px; font-weight:700; color:#999; cursor:pointer; line-height:1; padding:0; transition:color .2s;}
+  .close-x-btn:hover{ color:#d32f2f; }
+  .btn-ok{display:block; width:100%; padding:10px; margin-top:12px; background-color:#0288d1; color:#fff; border:none; border-radius:4px; font-weight:700; font-size:14px; cursor:pointer; text-align:center; transition:background-color .2s;}
+  .btn-ok:hover{ background-color:#01579b; }
+  .info-box{ width:100%; box-sizing:border-box; }
+  .notif-success-head{ text-align:center; margin-bottom:14px; }
+  .notif-success-icon{ font-size:28px; display:block; margin-bottom:4px; }
+  .notif-success-title{ margin:0; font-size:15px; font-weight:800; color:var(--ok); }
+  .notif-success-sub{ margin:4px 0 0; font-size:12px; color:#5B6672; }
+  .instruction-text{ font-size:13px; color:#333; line-height:1.5; margin:0 0 12px; }
+  .social-links{ display:flex; flex-direction:column; gap:8px; }
+  .btn-link{display:block; text-align:center; padding:8px; font-size:12px; font-weight:700; text-decoration:none; color:#fff; border-radius:4px;}
+  .whatsapp{ background-color:#25D366; }
+  .instagram{ background-color:#E1306C; }
+  .facebook{ background-color:#1877F2; }
+
+  /* ---------- FOOTER ---------- */
+  .site-footer{position:relative; z-index:1; margin-top:60px; background:var(--blue-deep); color:#EAF3FC;}
+  .site-footer .footer-inner{max-width:1180px; margin:0 auto; padding:36px 24px 22px; display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:28px;}
+  @media (max-width:720px){ .site-footer .footer-inner{grid-template-columns:1fr; gap:26px;} }
+  .footer-col h4{margin:0 0 12px; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:#fff; padding-bottom:8px; border-bottom:1px solid rgba(255,255,255,.18);}
+  .footer-col p{margin:0 0 6px; font-size:13px; line-height:1.6; color:#CFE0F2;}
+  .footer-col a{color:#CFE0F2; text-decoration:none;}
+  .footer-col a:hover{color:#fff; text-decoration:underline;}
+  .footer-contact-item{display:flex; gap:8px; align-items:flex-start; margin-bottom:8px; font-size:13px; color:#CFE0F2;}
+  .footer-contact-item svg{flex:0 0 auto; width:16px; height:16px; margin-top:1px; color:#8FB8E0;}
+  .footer-social{display:flex; flex-direction:column; gap:8px;}
+  .footer-social a{display:flex; align-items:center; gap:8px; font-size:13px; font-weight:600; padding:7px 10px; border-radius:6px; background:rgba(255,255,255,.06); transition:background .15s;}
+  .footer-social a:hover{background:rgba(255,255,255,.14); text-decoration:none;}
+  .footer-bottom{border-top:4px solid #082C55; background:#082C55; text-align:center; padding:12px 18px; font-size:11.5px; color:#9FBBDA; letter-spacing:.02em;}
+  .footer-bottom strong{color:#fff;}
+</style>
+</head>
+<body>
+
+<div class="topbar"><strong>PEMERINTAH KABUPATEN WAKATOBI</strong> — Layanan Ketenagakerjaan Daring</div>
+
+<div class="letterhead-block">
+  <div class="letterhead">
+    <img class="logo" src="../assets/img/logo-wakatobi.png" alt="Logo Pemerintah Kabupaten Wakatobi">
+    <div class="agency-text">
+      <p class="agency-line1">Pemerintah Kabupaten Wakatobi</p>
+      <p class="agency-line2">Dinas Koperasi, Usaha Kecil Menengah dan Tenaga Kerja</p>
+    </div>
+  </div>
+</div>
+<hr class="letterhead-rule">
+<hr class="letterhead-rule thick">
+
+<!-- NAVIGASI UTAMA -->
+<nav class="main-nav">
+  <div class="main-nav-inner">
+    <span class="nav-brand">DINKOP UKM &amp; NAKER WAKATOBI</span>
+    <div class="nav-links">
+      <a href="../index.html">Beranda</a>
+      <a href="index.html">Bidang Tenaga Kerja</a>
+      <a href="../ukm/index.html">Bidang UKM</a>
+      <a href="../koperasi/index.html">Bidang Koperasi/Kelembagaan</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="breadcrumb">
+    <a href="../index.html">Beranda</a>
+    <span class="sep">/</span>
+    <a href="index.html">Bidang Tenaga Kerja</a>
+    <span class="sep">/</span>
+    <span class="current">Layanan BPJS Ketenagakerjaan</span>
+  </div>
+
+  <div class="page-title">
+    <h1>Formulir Layanan BPJS Ketenagakerjaan</h1>
+    <p>Lengkapi Seluruh Data dan Upload Dokumen Persyaratan Sesuai Petunjuk.</p>
+  </div>
+
+  <!-- MOBILE PROGRESS -->
+  <nav class="mobile-rail" id="mobileRail">
+    <a class="m-tab" data-target="sec-reg"><span class="dot"></span><span class="mlabel">Registrasi</span></a>
+    <a class="m-tab" data-target="sec-diri"><span class="dot"></span><span class="mlabel">Data Diri</span></a>
+    <a class="m-tab" data-target="sec-layanan"><span class="dot"></span><span class="mlabel">Layanan</span></a>
+    <a class="m-tab" data-target="sec-kontak"><span class="dot"></span><span class="mlabel">Kontak</span></a>
+  </nav>
+
+  <div class="layout">
+
+    <!-- DESKTOP RAIL -->
+    <aside class="rail" id="desktopRail">
+      <p class="rail-title">Status Berkas</p>
+
+      <a class="tab" data-target="sec-reg">
+        <span class="stamp-badge"><span class="num">1</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></span>
+        <span><span class="tab-label">Informasi Registrasi</span><br><span class="tab-sub">Data Awal Pengkodean</span></span>
+      </a>
+
+      <a class="tab" data-target="sec-diri">
+        <span class="stamp-badge"><span class="num">2</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></span>
+        <span><span class="tab-label">Identitas Pemohon</span><br><span class="tab-sub">Berkas KTP</span></span>
+      </a>
+
+      <a class="tab" data-target="sec-layanan">
+        <span class="stamp-badge"><span class="num">3</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></span>
+        <span><span class="tab-label">Detail Layanan</span><br><span class="tab-sub">Jenis Urusan BPJS</span></span>
+      </a>
+
+      <a class="tab" data-target="sec-kontak">
+        <span class="stamp-badge"><span class="num">4</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></span>
+        <span><span class="tab-label">Kontak & Keterangan</span><br><span class="tab-sub">Nomor HP & Uraian</span></span>
+      </a>
+    </aside>
+
+    <!-- FORM -->
+    <form id="registrationForm" onsubmit="handleSubmit(event)">
+
+    <!-- I. INFORMASI REGISTRASI -->
+    <div class="form-section" id="sec-reg" data-section="reg">
+      <div class="sec-head">
+          <span class="sec-num">I</span>
+          <div>
+              <h2 class="sec-title">Informasi Registrasi</h2>
+              <p class="sec-hint">Nomor registrasi akan terisi otomatis oleh sistem.</p>
+          </div>
+      </div>
+      <div class="grid2">
+          <div class="field">
+              <label>Nomor Registrasi <span style="color:var(--ink-soft); font-weight:400;">(perkiraan)</span></label>
+              <input type="text" id="no_reg" value="Memuat nomor otomatis..." readonly style="background-color:#E5E7EB; color:#4B5563; cursor:not-allowed;">
+              <p class="sec-hint" style="margin-top:6px;">Nomor ini masih perkiraan. Nomor registrasi resmi baru ditentukan setelah data berhasil dikirim.</p>
+          </div>
+          <div class="field">
+              <label>Hari dan Tanggal Registrasi <span class="req">*</span></label>
+              <input type="date" id="tgl_reg" required>
+          </div>
+      </div>
+  </div>
+
+  <!-- II. DATA DIRI -->
+  <div class="form-section" id="sec-diri" data-section="diri">
+    <div class="sec-head">
+      <span class="sec-num">II</span>
+      <div>
+          <h2 class="sec-title">Data Diri Pemohon</h2>
+          <p class="sec-hint">Diisi oleh pekerja/peserta, atau perwakilan pemberi kerja apabila mengajukan atas nama perusahaan.</p>
+      </div>
+    </div>
+    <div class="space-y-4">
+      <div class="grid2 divider-row">
+            <div class="field">
+                <label>NIK (Nomor Induk Kependudukan) <span class="req">*</span></label>
+                <input type="text" id="nik" placeholder="16 Digit Angka NIK" required>
+            </div>
+            <div class="field">
+              <label>Upload KTP <span class="req">*</span> <span style="color:var(--ink-soft); font-weight:400; font-size:11px;">(Maks 2MB)</span></label>
+              <div class="file-drop" id="drop_ktp">
+                  <div class="file-drop-inner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg><span class="file-name" data-default="Maks 2MB">Maks 2MB</span></div>
+                  <input type="file" id="file_ktp" accept="image/*,application/pdf" onchange="handleFile(this,'drop_ktp')" required>
+              </div>
+          </div>
+      </div>
+      <div class="field divider-row">
+          <label>Nama Lengkap sesuai KTP <span class="req">*</span></label>
+          <input type="text" id="nama" placeholder="Nama Lengkap Tanpa Singkatan" required>
+      </div>
+      <div class="grid2">
+          <div class="field">
+              <label>Domisili (Kecamatan) <span class="req">*</span></label>
+              <select id="domisili" required>
+                  <option value="" disabled selected>-- Pilih Kecamatan Domisili --</option>
+                  <option value="Kecamatan Wangi-Wangi">Kecamatan Wangi-Wangi</option>
+                  <option value="Kecamatan Wangi-Wangi Selatan">Kecamatan Wangi-Wangi Selatan</option>
+                  <option value="Kecamatan Kaledupa">Kecamatan Kaledupa</option>
+                  <option value="Kecamatan Kaledupa Selatan">Kecamatan Kaledupa Selatan</option>
+                  <option value="Kecamatan Tomia">Kecamatan Tomia</option>
+                  <option value="Kecamatan Tomia Timur">Kecamatan Tomia Timur</option>
+                  <option value="Kecamatan Binongko">Kecamatan Binongko</option>
+                  <option value="Kecamatan Togo Binongko">Kecamatan Togo Binongko</option>
+              </select>
+          </div>
+          <div class="field">
+              <label>Pekerjaan/Jabatan Saat Ini <span style="color:var(--ink-soft); font-weight:400;">(opsional)</span></label>
+              <input type="text" id="pekerjaan" placeholder="Contoh: Nelayan, Karyawan Swasta, dsb.">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- III. DETAIL LAYANAN -->
+    <div class="form-section" id="sec-layanan" data-section="layanan">
+      <div class="sec-head">
+          <span class="sec-num">III</span>
+          <div>
+              <h2 class="sec-title">Detail Layanan BPJS Ketenagakerjaan</h2>
+              <p class="sec-hint">Pilih jenis urusan yang ingin difasilitasi oleh Dinas.</p>
+          </div>
+      </div>
+
+      <div class="info-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span>Layanan ini bersifat fasilitasi/pendampingan oleh Dinas. Proses akhir tetap mengikuti ketentuan resmi BPJS Ketenagakerjaan, dan Anda mungkin diminta melengkapi dokumen tambahan sesuai jenis urusan yang dipilih.</span>
+      </div>
+
+      <div class="field divider-row">
+          <label>Jenis Layanan <span class="req">*</span></label>
+          <select id="jenis_layanan" required>
+              <option value="" disabled selected>-- Pilih Jenis Layanan --</option>
+              <option value="Pendaftaran Kepesertaan Baru (Penerima Upah)">Pendaftaran Kepesertaan Baru (Pekerja Penerima Upah)</option>
+              <option value="Pendaftaran Kepesertaan Baru (Bukan Penerima Upah/Mandiri)">Pendaftaran Kepesertaan Baru (Pekerja Bukan Penerima Upah/Mandiri)</option>
+              <option value="Klaim Jaminan Hari Tua (JHT)">Klaim Jaminan Hari Tua (JHT)</option>
+              <option value="Klaim Jaminan Kecelakaan Kerja (JKK)">Klaim Jaminan Kecelakaan Kerja (JKK)</option>
+              <option value="Klaim Jaminan Kematian (JKM)">Klaim Jaminan Kematian (JKM)</option>
+              <option value="Konsultasi/Pengaduan Lainnya">Konsultasi/Pengaduan Lainnya</option>
+          </select>
+      </div>
+
+      <div class="grid2 divider-row">
+          <div class="field">
+              <label>Nama Perusahaan/Pemberi Kerja <span style="color:var(--ink-soft); font-weight:400;">(opsional, isi jika terkait pekerja penerima upah)</span></label>
+              <input type="text" id="nama_perusahaan" placeholder="Nama perusahaan/pemberi kerja">
+          </div>
+          <div class="field">
+              <label>Nomor Kepesertaan BPJS Ketenagakerjaan <span style="color:var(--ink-soft); font-weight:400;">(opsional, jika sudah terdaftar)</span></label>
+              <input type="text" id="no_bpjs" placeholder="Nomor Kartu Peserta (KPJ)">
+          </div>
+      </div>
+
+      <div class="field divider-row">
+          <label>Upload Kartu Kepesertaan BPJS Ketenagakerjaan <span style="color:var(--ink-soft); font-weight:400;">(opsional, jika sudah terdaftar)</span></label>
+          <div class="file-drop" id="drop_kartu_bpjs">
+              <div class="file-drop-inner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg><span class="file-name" data-default="Maks 2MB">Maks 2MB</span></div>
+              <input type="file" id="file_kartu_bpjs" accept="image/*,application/pdf" onchange="handleFile(this,'drop_kartu_bpjs')">
+          </div>
+      </div>
+
+      <div class="field">
+          <label>Upload Dokumen Pendukung Sesuai Jenis Layanan <span class="req">*</span> <span style="color:var(--ink-soft); font-weight:400; font-size:11px;">(Maks 2MB — mis. KK, surat keterangan kerja, dokumen kecelakaan kerja/kematian, dsb.)</span></label>
+          <div class="file-drop" id="drop_dokumen">
+              <div class="file-drop-inner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg><span class="file-name" data-default="Maks 2MB">Maks 2MB</span></div>
+              <input type="file" id="file_dokumen" accept="image/*,application/pdf" onchange="handleFile(this,'drop_dokumen')" required>
+          </div>
+      </div>
+    </div>
+
+    <!-- IV. KONTAK & KETERANGAN -->
+    <div class="form-section" id="sec-kontak" data-section="kontak">
+      <div class="sec-head">
+        <span class="sec-num">IV</span>
+        <div>
+          <h2 class="sec-title">Kontak & Uraian Keperluan</h2>
+          <p class="sec-hint">Jelaskan singkat keperluan Anda agar petugas dapat menindaklanjuti dengan tepat.</p>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <div class="grid2 divider-row">
+          <div class="field">
+            <label>Kontak Aktif (WhatsApp) <span class="req">*</span></label>
+            <input type="text" id="kontak" placeholder="08xxxxxxxxxx" inputmode="tel" required>
+          </div>
+          <div class="field">
+            <label>Email Aktif <span style="color:var(--ink-soft); font-weight:400;">(opsional)</span></label>
+            <input type="email" id="email" placeholder="nama@email.com">
+          </div>
+        </div>
+
+        <div class="field divider-row">
+          <label>Uraian Keperluan <span class="req">*</span></label>
+          <textarea id="uraian" placeholder="Jelaskan singkat keperluan Anda, misalnya kronologi kecelakaan kerja, alasan klaim, atau pertanyaan yang ingin dikonsultasikan." required></textarea>
+        </div>
+
+        <div class="field checkbox-row" style="padding-top:6px;">
+          <input type="checkbox" id="konfirmasi_data" value="Data Benar" required style="width:auto; margin-right:8px;">
+          <span>Saya menyatakan bahwa seluruh data dan dokumen yang saya unggah adalah <b>benar dan sah</b>, serta bersedia melengkapi dokumen tambahan apabila diperlukan pada saat proses verifikasi. <span class="req">*</span></span>
+        </div>
+      </div>
+    </div>
+
+      <!-- SUBMIT -->
+      <div class="submit-wrap">
+        <button type="submit" id="submitBtn" class="stamp-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+          Kirim Seluruh Data & Berkas
+        </button>
+        <p id="loadingText" class="loading-text hidden">Sedang memproses & mengunggah berkas ke server, mohon tidak menutup halaman…</p>
+        <p class="progress-note" id="progressNote">0 dari 4 bagian lengkap.</p>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<!-- NOTIFIKASI SUKSES -->
+<div class="permanent-notification-wrapper" id="permanentNotification">
+  <button type="button" class="close-x-btn" onclick="tutupNotifikasi()" aria-label="Tutup notifikasi">&times;</button>
+  <div class="info-box">
+    <div class="notif-success-head">
+      <span class="notif-success-icon">✅</span>
+      <p class="notif-success-title">Data Berhasil Terkirim!</p>
+      <p class="notif-success-sub">Permohonan Layanan BPJS Ketenagakerjaan Anda telah kami terima.</p>
+      <p class="notif-success-sub" style="margin-top:8px; font-weight:800; color:var(--blue-deep); font-size:14px;">Nomor Registrasi Resmi: <span id="finalNoReg">-</span></p>
+    </div>
+    <p class="instruction-text">
+      📸 <strong>Silakan screenshot halaman ini</strong> sebagai bukti telah mendaftar dan kirimkan ke kontak admin kami di bawah ini:
+    </p>
+    <div class="social-links">
+      <a href="https://wa.me/6282197462749?text=Halo%20Admin,%20saya%20ingin%20mengirimkan%20bukti%20pendaftaran%20Layanan%20BPJS%20Ketenagakerjaan" target="_blank" class="btn-link whatsapp">🟢 WhatsApp Admin</a>
+      <a href="https://instagram.com/dinkop_ukm_naker_wakatobi" target="_blank" class="btn-link instagram">📸 Instagram</a>
+      <a href="https://facebook.com/share/19CRYqovn4/?mibextid=wwXXlfr" target="_blank" class="btn-link facebook">🔵 Facebook</a>
+    </div>
+    <button type="button" class="btn-ok" onclick="tutupNotifikasi()">Selesai</button>
+  </div>
+</div>
+
+<!-- OVERLAY STEMPEL -->
+<div class="stamp-overlay" id="stampOverlay">
+  <div class="stamp-graphic">
+    <strong>BERKAS DITERIMA</strong>
+    <span>LAYANAN BPJS KETENAGAKERJAAN — DINKOP UKM &amp; NAKER</span>
+    <small id="stampDate"></small>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>Tentang Instansi</h4>
+      <p><strong>Dinas Koperasi, Usaha Kecil Menengah dan Tenaga Kerja</strong><br>Pemerintah Kabupaten Wakatobi</p>
+      <p>Jl. Poros Liya, Desa Liya One Melangka, Kecamatan Wangi-Wangi Selatan, Kabupaten Wakatobi, Sulawesi Tenggara</p>
+    </div>
+    <div class="footer-col">
+      <h4>Kontak Layanan</h4>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>0821-9746-2749 (WhatsApp Admin)</span>
+      </div>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" stroke="none"/><path d="M22 6l-10 7L2 6" /><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+        <span>dinkopukmnaker@wakatobikab.go.id</span>
+      </div>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span>Senin–Jumat, 08.00–16.00 WITA</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Ikuti Kami</h4>
+      <div class="footer-social">
+        <a href="https://wa.me/6282197462749" target="_blank">🟢 WhatsApp Admin</a>
+        <a href="https://instagram.com/dinkop_ukm_naker_wakatobi" target="_blank">📸 Instagram</a>
+        <a href="https://facebook.com/share/19CRYqovn4/?mibextid=wwXXlfr" target="_blank">🔵 Facebook</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; <span id="footerYear"></span> <strong>Dinas Koperasi, UKM dan Tenaga Kerja Kabupaten Wakatobi</strong>. Seluruh hak cipta dilindungi.
+  </div>
+</footer>
+
+<script>
+  // Ganti dengan URL Google Apps Script khusus formulir Layanan BPJS Ketenagakerjaan
+  const WEB_APP_URL = "GANTI_DENGAN_URL_GOOGLE_APPS_SCRIPT_ANDA";
+
+  window.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('footerYear').textContent = new Date().getFullYear();
+    if (!WEB_APP_URL || WEB_APP_URL.startsWith("GANTI_")) {
+      document.getElementById('no_reg').value = "Belum terhubung ke server";
+      return;
+    }
+    fetch(WEB_APP_URL)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('no_reg').value = (data.status === "success") ? data.next_reg : "Gagal memuat nomor";
+      })
+      .catch(err => {
+        document.getElementById('no_reg').value = "Error koneksi";
+        console.error(err);
+      });
+  });
+
+  const MAX_SIZE = 2 * 1024 * 1024; // 2MB
+
+  function handleFile(input, dropId) {
+    const drop = document.getElementById(dropId);
+    const nameEl = drop.querySelector('.file-name');
+    if (input.files && input.files[0]) {
+      const f = input.files[0];
+      if (f.size > MAX_SIZE) {
+        alert(`Maaf, ukuran file "${f.name}" terlalu besar. Maksimal ukuran file adalah 2MB.`);
+        input.value = "";
+        drop.classList.remove('filled');
+        nameEl.textContent = nameEl.dataset.default;
+      } else {
+        drop.classList.add('filled');
+        nameEl.textContent = f.name;
+      }
+    } else {
+      drop.classList.remove('filled');
+      nameEl.textContent = nameEl.dataset.default;
+    }
+    updateProgress();
+  }
+
+  const toBase64 = file => new Promise((resolve, reject) => {
+    if (!file || file.length === 0) { resolve(null); return; }
+    const reader = new FileReader();
+    reader.readAsDataURL(file[0]);
+    reader.onload = () => resolve({ base64: reader.result.split(',')[1], type: file[0].type });
+    reader.onerror = error => reject(error);
+  });
+
+  // ---------- PROGRESS TRACKER ----------
+  const sections = ['reg', 'diri', 'layanan', 'kontak'];
+  function sectionComplete(name) {
+    const el = document.querySelector(`[data-section="${name}"]`);
+    const required = el.querySelectorAll('input[required], select[required], textarea[required]');
+    for (const inp of required) {
+      if (inp.type === 'checkbox' && !inp.checked) return false;
+      if (inp.type === 'file' && (!inp.files || inp.files.length === 0)) return false;
+      if (inp.type !== 'checkbox' && inp.type !== 'file' && !inp.value.trim()) return false;
+    }
+    return true;
+  }
+
+  function updateProgress() {
+    let doneCount = 0;
+    sections.forEach(name => {
+      const complete = sectionComplete(name);
+      if (complete) doneCount++;
+      document.querySelectorAll(`.tab[data-target="sec-${name}"], .m-tab[data-target="sec-${name}"]`).forEach(t => {
+        t.classList.toggle('done', complete);
+      });
+    });
+    document.getElementById('progressNote').textContent = `${doneCount} dari 4 bagian lengkap.`;
+  }
+
+  document.getElementById('registrationForm').addEventListener('input', updateProgress);
+  document.getElementById('registrationForm').addEventListener('change', updateProgress);
+
+  document.querySelectorAll('.tab, .m-tab').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.getElementById(el.dataset.target);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = entry.target.id;
+      document.querySelectorAll(`.tab[data-target="${id}"]`).forEach(t => {
+        t.classList.toggle('active', entry.isIntersecting);
+      });
+    });
+  }, { rootMargin: '-20% 0px -60% 0px' });
+  document.querySelectorAll('.form-section').forEach(sec => observer.observe(sec));
+
+  function tutupNotifikasi() {
+    document.getElementById('permanentNotification').classList.remove('show');
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    if (!WEB_APP_URL || WEB_APP_URL.startsWith("GANTI_")) {
+      alert("Formulir ini belum terhubung ke server (Google Apps Script). Silakan hubungkan WEB_APP_URL terlebih dahulu.");
+      return;
+    }
+    const submitBtn = document.getElementById('submitBtn');
+    const loadingText = document.getElementById('loadingText');
+    submitBtn.disabled = true;
+    loadingText.classList.remove('hidden');
+
+    try {
+      const fileKtp       = document.getElementById('file_ktp').files.length ? await toBase64(document.getElementById('file_ktp').files) : null;
+      const fileKartuBpjs  = document.getElementById('file_kartu_bpjs').files.length ? await toBase64(document.getElementById('file_kartu_bpjs').files) : null;
+      const fileDokumen    = document.getElementById('file_dokumen').files.length ? await toBase64(document.getElementById('file_dokumen').files) : null;
+
+      const payload = {
+        no_reg: document.getElementById('no_reg').value,
+        tgl_reg: document.getElementById('tgl_reg').value,
+        nik: document.getElementById('nik').value,
+        nama: document.getElementById('nama').value,
+        domisili: document.getElementById('domisili').value,
+        pekerjaan: document.getElementById('pekerjaan').value,
+        jenis_layanan: document.getElementById('jenis_layanan').value,
+        nama_perusahaan: document.getElementById('nama_perusahaan').value,
+        no_bpjs: document.getElementById('no_bpjs').value,
+        uraian: document.getElementById('uraian').value,
+        kontak: document.getElementById('kontak').value,
+        email: document.getElementById('email').value,
+        konfirmasi_data: document.getElementById('konfirmasi_data').checked ? "Ya (Data Benar)" : "Tidak",
+        file_ktp: fileKtp,
+        file_kartu_bpjs: fileKartuBpjs,
+        file_dokumen: fileDokumen
+      };
+
+      const response = await fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify(payload) });
+      const result = await response.json();
+
+      if (result.status === "success") {
+        document.getElementById('stampDate').textContent = new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' });
+        document.getElementById('finalNoReg').textContent = result.no_reg || '-';
+
+        const overlay = document.getElementById('stampOverlay');
+        overlay.classList.add('show');
+        setTimeout(() => { overlay.classList.remove('show'); }, 2200);
+
+        document.getElementById('permanentNotification').classList.add('show');
+
+        document.querySelectorAll('.file-drop').forEach(d => {
+          d.classList.remove('filled');
+          const n = d.querySelector('.file-name');
+          n.textContent = n.dataset.default;
+        });
+
+        document.getElementById('registrationForm').reset();
+        updateProgress();
+      } else {
+        alert("Gagal menyimpan data: " + result.message);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Terjadi masalah jaringan atau internal server saat mengirim data berkas.");
+    } finally {
+      submitBtn.disabled = false;
+      loadingText.classList.add('hidden');
+    }
+  }
+</script>
+
+</body>
+</html>
