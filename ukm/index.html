@@ -93,6 +93,35 @@
     color:#C2670A; background:#FFF7ED; border:1px solid #FCDBA6; padding:7px 14px; border-radius:999px;
   }
 
+  /* ---------- LAYANAN CARDS ---------- */
+  .layanan-list{display:flex; flex-direction:column; gap:18px;}
+  .layanan-card{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--shadow); padding:24px 26px; display:flex; gap:20px; align-items:flex-start;
+  }
+  @media (max-width:720px){ .layanan-card{flex-direction:column;} }
+  .layanan-num{
+    flex:0 0 auto; width:44px; height:44px; border-radius:50%; background:var(--blue-deep); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-family:'Space Mono',monospace;
+    font-weight:700; font-size:15px;
+  }
+  .layanan-body{flex:1; min-width:0;}
+  .layanan-head{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:6px;}
+  .layanan-head h3{margin:0; font-size:16.5px; font-weight:700; color:var(--blue-deep);}
+  .status-badge{font-size:10.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; padding:3px 9px; border-radius:999px;}
+  .status-aktif{background:#F0FDF4; color:#15803D; border:1px solid #BBF0CD;}
+  .status-segera{background:#FFF7ED; color:#C2670A; border:1px solid #FCDBA6;}
+  .layanan-body p{margin:0 0 14px; font-size:13.5px; color:var(--ink-soft); line-height:1.6; max-width:62ch;}
+  .layanan-meta{display:flex; gap:16px; flex-wrap:wrap; margin-bottom:16px;}
+  .meta-item{display:flex; align-items:center; gap:6px; font-size:12px; color:var(--ink-soft);}
+  .meta-item svg{width:14px; height:14px; color:var(--blue); flex:0 0 auto;}
+  .layanan-actions{display:flex; gap:10px; flex-wrap:wrap;}
+  .btn{display:inline-flex; align-items:center; gap:8px; text-decoration:none; font-weight:700; font-size:13px; padding:10px 18px; border-radius:8px; transition:filter .15s, transform .08s, background .15s;}
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:var(--blue-deep); color:#fff;}
+  .btn-primary:hover{filter:brightness(1.08);}
+  .btn-disabled{background:#EAEDF1; color:#9AA5B1; cursor:not-allowed; pointer-events:none;}
+
   .info-strip{
     margin-top:44px; background:linear-gradient(135deg, var(--blue-deep), var(--blue-mid));
     border-radius:14px; padding:26px 28px; color:#fff; display:flex; gap:20px; align-items:center; box-shadow:var(--shadow);
@@ -167,11 +196,113 @@
     <h2 class="section-title">Jenis Pelayanan Sedang Disusun</h2>
     <p class="section-sub">Halaman ini akan diperbarui begitu daftar layanan resmi Bidang UKM ditetapkan.</p>
 
-    <div class="coming-soon">
-      <div class="coming-soon-icon">🛠️</div>
-      <h3>Layanan Segera Hadir</h3>
-      <p>Kami sedang menyusun kerangka jenis pelayanan yang akan disediakan oleh Bidang Usaha Kecil Menengah. Setiap layanan yang aktif akan tampil di sini lengkap dengan formulir daring dan persyaratannya.</p>
-      <span class="coming-soon-note">⏳ Dalam Penyusunan</span>
+    <div class="layanan-list">
+
+      <!-- 1. Pendataan/Registrasi Pelaku Usaha -->
+      <div class="layanan-card">
+        <div class="layanan-num">1</div>
+        <div class="layanan-body">
+          <div class="layanan-head">
+            <h3>Pendataan/Registrasi Pelaku Usaha Mikro &amp; Kecil</h3>
+            <span class="status-badge status-segera">Segera Hadir</span>
+          </div>
+          <p>Pendataan pelaku usaha mikro dan kecil di Kabupaten Wakatobi sebagai basis data pembinaan dan penyaluran program dinas.</p>
+          <div class="layanan-meta">
+            <span class="meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+              Formulir daring segera tersedia
+            </span>
+          </div>
+          <div class="layanan-actions">
+            <span class="btn btn-disabled">Formulir Belum Tersedia</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Fasilitasi NIB -->
+      <div class="layanan-card">
+        <div class="layanan-num">2</div>
+        <div class="layanan-body">
+          <div class="layanan-head">
+            <h3>Fasilitasi Nomor Induk Berusaha (NIB) via OSS</h3>
+            <span class="status-badge status-segera">Segera Hadir</span>
+          </div>
+          <p>Pendampingan pengurusan legalitas usaha melalui sistem OSS (Online Single Submission) bagi pelaku UKM Wakatobi.</p>
+          <div class="layanan-meta">
+            <span class="meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+              Formulir daring segera tersedia
+            </span>
+          </div>
+          <div class="layanan-actions">
+            <span class="btn btn-disabled">Formulir Belum Tersedia</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Pendaftaran Pelatihan/Bimtek Kewirausahaan -->
+      <div class="layanan-card">
+        <div class="layanan-num">3</div>
+        <div class="layanan-body">
+          <div class="layanan-head">
+            <h3>Pendaftaran Pelatihan/Bimbingan Teknis Kewirausahaan</h3>
+            <span class="status-badge status-segera">Segera Hadir</span>
+          </div>
+          <p>Pendaftaran pelatihan dan bimbingan teknis bagi pelaku UKM, seperti pengolahan produk, pemasaran digital, dan manajemen usaha.</p>
+          <div class="layanan-meta">
+            <span class="meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+              Formulir daring segera tersedia
+            </span>
+          </div>
+          <div class="layanan-actions">
+            <span class="btn btn-disabled">Formulir Belum Tersedia</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Fasilitasi Akses Permodalan -->
+      <div class="layanan-card">
+        <div class="layanan-num">4</div>
+        <div class="layanan-body">
+          <div class="layanan-head">
+            <h3>Fasilitasi Akses Permodalan (KUR/Bantuan Modal)</h3>
+            <span class="status-badge status-segera">Segera Hadir</span>
+          </div>
+          <p>Pendampingan dan surat rekomendasi bagi pelaku UKM yang ingin mengajukan akses permodalan seperti Kredit Usaha Rakyat (KUR).</p>
+          <div class="layanan-meta">
+            <span class="meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+              Formulir daring segera tersedia
+            </span>
+          </div>
+          <div class="layanan-actions">
+            <span class="btn btn-disabled">Formulir Belum Tersedia</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Pendaftaran Pameran/Promosi Produk UKM -->
+      <div class="layanan-card">
+        <div class="layanan-num">5</div>
+        <div class="layanan-body">
+          <div class="layanan-head">
+            <h3>Pendaftaran Pameran/Promosi Produk UKM</h3>
+            <span class="status-badge status-segera">Segera Hadir</span>
+          </div>
+          <p>Pendaftaran bagi pelaku UKM yang ingin ikut serta dalam pameran atau kegiatan promosi produk tingkat daerah maupun nasional.</p>
+          <div class="layanan-meta">
+            <span class="meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+              Formulir daring segera tersedia
+            </span>
+          </div>
+          <div class="layanan-actions">
+            <span class="btn btn-disabled">Formulir Belum Tersedia</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
