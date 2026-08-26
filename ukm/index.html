@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bidang Usaha Kecil Menengah — Dinas Koperasi, UKM dan Tenaga Kerja Kab. Wakatobi</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bidang Usaha Kecil Menengah — Dinas Koperasi, UKM dan Tenaga Kerja Kab. Wakatobi</title>
+  
+  <!-- Font dengan cadangan sistem -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
   :root{
     --blue-deep:#0B3D74; --blue:#0F5FA6; --blue-mid:#1673C4; --blue-soft:#EAF3FC; --blue-line:#CFE0F2;
@@ -19,7 +22,8 @@
     margin:0; position:relative;
     background-image: linear-gradient(180deg, rgba(234,243,252,.94) 0%, rgba(246,250,254,.94) 260px, rgba(246,250,254,.94) 100%);
     background-repeat:no-repeat; background-position:top center; background-size:100% auto;
-    color:var(--ink); font-family:'Inter',system-ui,sans-serif; -webkit-font-smoothing:antialiased; min-height:100vh;
+    color:var(--ink); font-family:'Inter', 'Segoe UI', Roboto, system-ui, sans-serif;
+    -webkit-font-smoothing:antialiased; min-height:100vh;
   }
   body::before{
     content:""; position:fixed; inset:0;
@@ -28,11 +32,9 @@
     filter:blur(6px); transform:scale(1.05); z-index:-1;
   }
   .wrap{max-width:1180px; margin:0 auto; padding: 0 18px 80px; position:relative; z-index:1;}
-  a{color:inherit;}
-
+  a{color:inherit; text-decoration:none;}
   .topbar{background:var(--blue-deep); color:#fff; font-size:11.5px; letter-spacing:.04em; padding:7px 0; text-align:center;}
   .topbar strong{font-weight:700;}
-
   .letterhead-block{
     position:relative; max-width:1180px; margin:22px auto 0; padding:26px 24px;
     background-image: linear-gradient(135deg, rgba(11,61,116,.55) 0%, rgba(15,95,166,.46) 100%), url('../assets/img/sampul_dinkop.jpg');
@@ -47,7 +49,6 @@
   .agency-line2{font-weight:700; font-size:clamp(13px,2vw,16px); color:#EAF3FC; text-transform:uppercase; margin:0; letter-spacing:.01em; text-shadow:0 1px 4px rgba(0,0,0,.55), 0 1px 10px rgba(0,0,0,.35);}
   .letterhead-rule{border:none; height:1px; background:var(--blue-line); margin:0;}
   .letterhead-rule.thick{height:4px; background:var(--blue-deep); margin-top:2px;}
-
   .main-nav{position:sticky; top:0; z-index:30; background:rgba(255,255,255,.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--blue-line); box-shadow:0 2px 10px rgba(11,61,116,.06);}
   .main-nav-inner{max-width:1180px; margin:0 auto; padding:0 18px; display:flex; align-items:center; justify-content:space-between; gap:12px; height:54px;}
   .nav-brand{font-weight:800; font-size:13.5px; color:var(--blue-deep); letter-spacing:.01em; white-space:nowrap;}
@@ -56,13 +57,11 @@
   .nav-links a:hover{background:var(--blue-soft); color:var(--blue-deep);}
   .nav-links a.current{background:var(--blue-deep); color:#fff;}
   @media (max-width:720px){ .main-nav-inner{flex-direction:column; height:auto; padding:10px 18px;} .nav-links{justify-content:center;} }
-
   .breadcrumb{margin-top:18px; font-size:12.5px; color:var(--ink-soft); display:flex; align-items:center; gap:6px; flex-wrap:wrap;}
   .breadcrumb a{color:var(--blue); text-decoration:none; font-weight:600;}
   .breadcrumb a:hover{text-decoration:underline;}
   .breadcrumb .sep{color:#AEC1D4;}
   .breadcrumb .current{color:var(--ink); font-weight:600;}
-
   .bidang-hero{
     margin-top:16px; background:#fff; border:1px solid var(--line); border-radius:14px;
     box-shadow:var(--shadow); padding:30px 28px; display:flex; gap:22px; align-items:flex-start;
@@ -71,28 +70,10 @@
   .bidang-hero-icon{flex:0 0 auto; width:58px; height:58px; border-radius:14px; background:var(--blue-soft); color:var(--blue-deep); display:flex; align-items:center; justify-content:center; font-size:28px;}
   .bidang-hero h1{margin:0 0 8px; font-size:clamp(21px,3vw,27px); font-weight:800; color:var(--blue-deep);}
   .bidang-hero p{margin:0; font-size:14px; color:var(--ink-soft); line-height:1.65; max-width:70ch;}
-
   .section{margin-top:44px;}
   .section-eyebrow{font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--blue); margin:0 0 6px;}
   .section-title{margin:0 0 6px; font-size:clamp(19px,2.4vw,24px); font-weight:800; color:var(--blue-deep);}
   .section-sub{margin:0 0 22px; color:var(--ink-soft); font-size:13.5px; max-width:65ch;}
-
-  /* ---------- COMING SOON PANEL ---------- */
-  .coming-soon{
-    background:#fff; border:1.5px dashed var(--blue-line); border-radius:14px;
-    box-shadow:var(--shadow); padding:40px 30px; text-align:center;
-  }
-  .coming-soon-icon{
-    width:64px; height:64px; margin:0 auto 18px; border-radius:16px; background:var(--blue-soft);
-    color:var(--blue-deep); display:flex; align-items:center; justify-content:center; font-size:30px;
-  }
-  .coming-soon h3{margin:0 0 8px; font-size:17px; font-weight:800; color:var(--blue-deep);}
-  .coming-soon p{margin:0 auto; font-size:13.5px; color:var(--ink-soft); line-height:1.6; max-width:56ch;}
-  .coming-soon-note{
-    margin-top:20px; display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:700;
-    color:#C2670A; background:#FFF7ED; border:1px solid #FCDBA6; padding:7px 14px; border-radius:999px;
-  }
-
   /* ---------- LAYANAN CARDS ---------- */
   .layanan-list{display:flex; flex-direction:column; gap:18px;}
   .layanan-card{
@@ -103,12 +84,12 @@
   .layanan-num{
     flex:0 0 auto; width:44px; height:44px; border-radius:50%; background:var(--blue-deep); color:#fff;
     display:flex; align-items:center; justify-content:center; font-family:'Space Mono',monospace;
-    font-weight:700; font-size:15px;
+    font-weight:700; font-size:15px; flex-shrink:0;
   }
   .layanan-body{flex:1; min-width:0;}
   .layanan-head{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:6px;}
   .layanan-head h3{margin:0; font-size:16.5px; font-weight:700; color:var(--blue-deep);}
-  .status-badge{font-size:10.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; padding:3px 9px; border-radius:999px;}
+  .status-badge{font-size:10.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; padding:3px 9px; border-radius:999px; white-space:nowrap;}
   .status-aktif{background:#F0FDF4; color:#15803D; border:1px solid #BBF0CD;}
   .status-segera{background:#FFF7ED; color:#C2670A; border:1px solid #FCDBA6;}
   .layanan-body p{margin:0 0 14px; font-size:13.5px; color:var(--ink-soft); line-height:1.6; max-width:62ch;}
@@ -116,21 +97,19 @@
   .meta-item{display:flex; align-items:center; gap:6px; font-size:12px; color:var(--ink-soft);}
   .meta-item svg{width:14px; height:14px; color:var(--blue); flex:0 0 auto;}
   .layanan-actions{display:flex; gap:10px; flex-wrap:wrap;}
-  .btn{display:inline-flex; align-items:center; gap:8px; text-decoration:none; font-weight:700; font-size:13px; padding:10px 18px; border-radius:8px; transition:filter .15s, transform .08s, background .15s;}
+  .btn{display:inline-flex; align-items:center; gap:8px; text-decoration:none; font-weight:700; font-size:13px; padding:10px 18px; border-radius:8px; transition:filter .15s, transform .08s, background .15s; border:none; cursor:pointer;}
   .btn:active{transform:translateY(1px);}
   .btn-primary{background:var(--blue-deep); color:#fff;}
   .btn-primary:hover{filter:brightness(1.08);}
   .btn-disabled{background:#EAEDF1; color:#9AA5B1; cursor:not-allowed; pointer-events:none;}
-
   .info-strip{
     margin-top:44px; background:linear-gradient(135deg, var(--blue-deep), var(--blue-mid));
     border-radius:14px; padding:26px 28px; color:#fff; display:flex; gap:20px; align-items:center; box-shadow:var(--shadow);
   }
   @media (max-width:640px){ .info-strip{flex-direction:column; align-items:flex-start;} }
-  .info-strip svg{flex:0 0 auto; width:34px; height:34px; color:#BFDBFE;}
+  .info-strip svg{flex:0 0 auto; width:34px; height:34px; color:#BFDBFE; flex-shrink:0;}
   .info-strip h4{margin:0 0 4px; font-size:15px; font-weight:700;}
   .info-strip p{margin:0; font-size:13px; color:#DCEBFB; line-height:1.55;}
-
   .site-footer{position:relative; z-index:1; margin-top:60px; background:var(--blue-deep); color:#EAF3FC;}
   .site-footer .footer-inner{max-width:1180px; margin:0 auto; padding:36px 24px 22px; display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:28px;}
   @media (max-width:720px){ .site-footer .footer-inner{grid-template-columns:1fr; gap:26px;} }
@@ -139,7 +118,7 @@
   .footer-col a{color:#CFE0F2; text-decoration:none;}
   .footer-col a:hover{color:#fff; text-decoration:underline;}
   .footer-contact-item{display:flex; gap:8px; align-items:flex-start; margin-bottom:8px; font-size:13px; color:#CFE0F2;}
-  .footer-contact-item svg{flex:0 0 auto; width:16px; height:16px; margin-top:1px; color:#8FB8E0;}
+  .footer-contact-item svg{flex:0 0 auto; width:16px; height:16px; margin-top:1px; color:#8FB8E0; flex-shrink:0;}
   .footer-social{display:flex; flex-direction:column; gap:8px;}
   .footer-social a{display:flex; align-items:center; gap:8px; font-size:13px; font-weight:600; padding:7px 10px; border-radius:6px; background:rgba(255,255,255,.06); transition:background .15s;}
   .footer-social a:hover{background:rgba(255,255,255,.14); text-decoration:none;}
@@ -176,13 +155,14 @@
 </nav>
 
 <div class="wrap">
-
+  <!-- Jalur Navigasi -->
   <div class="breadcrumb">
     <a href="../index.html">Beranda</a>
     <span class="sep">/</span>
     <span class="current">Bidang Usaha Kecil Menengah</span>
   </div>
 
+  <!-- Kepala Halaman -->
   <section class="bidang-hero">
     <div class="bidang-hero-icon">🛍️</div>
     <div>
@@ -191,13 +171,13 @@
     </div>
   </section>
 
+  <!-- Daftar Layanan -->
   <section class="section">
     <p class="section-eyebrow">Layanan Bidang UKM</p>
     <h2 class="section-title">Jenis Pelayanan Sedang Disusun</h2>
     <p class="section-sub">Halaman ini akan diperbarui begitu daftar layanan resmi Bidang UKM ditetapkan.</p>
 
     <div class="layanan-list">
-
       <!-- 1. Pendataan/Registrasi Pelaku Usaha -->
       <div class="layanan-card">
         <div class="layanan-num">1</div>
@@ -240,7 +220,7 @@
         </div>
       </div>
 
-      <!-- 3. Pendaftaran Pelatihan/Bimtek Kewirausahaan -->
+      <!-- 3. Pelatihan Kewirausahaan -->
       <div class="layanan-card">
         <div class="layanan-num">3</div>
         <div class="layanan-body">
@@ -261,7 +241,7 @@
         </div>
       </div>
 
-      <!-- 4. Fasilitasi Akses Permodalan -->
+      <!-- 4. Akses Permodalan -->
       <div class="layanan-card">
         <div class="layanan-num">4</div>
         <div class="layanan-body">
@@ -282,7 +262,7 @@
         </div>
       </div>
 
-      <!-- 5. Pendaftaran Pameran/Promosi Produk UKM -->
+      <!-- 5. Pameran/Promosi -->
       <div class="layanan-card">
         <div class="layanan-num">5</div>
         <div class="layanan-body">
@@ -302,10 +282,10 @@
           </div>
         </div>
       </div>
-
     </div>
   </section>
 
+  <!-- Kotak Informasi Kontak -->
   <div class="info-strip">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
     <div>
@@ -313,9 +293,9 @@
       <p>Sambil menunggu layanan daring tersedia, hubungi admin melalui WhatsApp di 0821-9746-2749 untuk konsultasi seputar usaha kecil menengah Anda.</p>
     </div>
   </div>
-
 </div>
 
+<!-- Pijak Kaki -->
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-col">
