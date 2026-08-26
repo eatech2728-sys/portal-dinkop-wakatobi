@@ -5,20 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jadwal & Hari Libur</title>
 
-    <!-- ✅ PERBAIKAN 1: Font Dimuat dengan Benar -->
+    <!-- ✅ Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Pilih font yang kompatibel: Noto Sans Sans + dukungan huruf Indonesia -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            /* Variabel font agar mudah diubah di satu tempat */
             --font-utama: 'Noto Sans Sans', 'Segoe UI', Roboto, sans-serif;
             --warna-utama: #2563eb;
             --warna-libur: #dc2626;
             --warna-teks: #1f2937;
-            --latar: #f3f4f6;
+
+            /* ================================================= */
+            /* ✅ LANGSUNG PAKAI FOLDER ASSET DI BERANDA        */
+            /* Jalur sama persis seperti halaman utamamu       */
+            /* ================================================= */
+            --gambar-sampul: url('asset/sampul.jpg');
+            --gambar-latar: url('asset/latar.jpg');
         }
 
         * {
@@ -28,20 +32,61 @@
         }
 
         body {
-            font-family: var(--font-utama); /* Font konsisten di seluruh halaman */
-            background-color: var(--latar);
+            font-family: var(--font-utama);
             color: var(--warna-teks);
             line-height: 1.6;
             padding: 20px;
+
+            /* ✅ Latar belakang dari folder asset di beranda */
+            background-image: var(--gambar-latar);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: #e5e7eb;
+        }
+
+        /* ✅ Bagian Sampul */
+        .bagian-sampul {
+            background-image: var(--gambar-sampul);
+            background-size: cover;
+            background-position: center;
+            height: 180px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .sampul-transparan {
+            background: rgba(0,0,0,0.4);
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.6);
         }
 
         .wadah {
             max-width: 600px;
             margin: 0 auto;
-            background: white;
+            background: rgba(255,255,255,0.95);
             padding: 25px;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        /* ✅ Logo dari folder asset di beranda */
+        .logo-posisi {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .logo-gambar {
+            max-height: 70px;
+            max-width: 180px;
         }
 
         h1, h2, h3 {
@@ -61,43 +106,25 @@
             list-style: none;
             margin-top: 10px;
         }
-
         .daftar-libur li {
             padding: 10px 12px;
             margin-bottom: 8px;
             border-radius: 6px;
             border-left: 4px solid;
         }
-
-        /* ✅ Fitur Baru: Warna berbeda untuk jenis libur */
         .libur-nasional {
             background: #fef2f2;
             border-color: var(--warna-libur);
             color: #991b1b;
         }
-
         .libur-lain {
             background: #f0fdf4;
             border-color: #16a34a;
             color: #166534;
         }
-
-        .pesan {
-            padding: 10px;
-            border-radius: 6px;
-            margin-top: 10px;
-        }
-
-        .memuat {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .error {
-            background: #fee2e2;
-            color: #b91c1c;
-        }
-
+        .pesan { padding: 10px; border-radius: 6px; margin-top: 10px; }
+        .memuat { background: #fef3c7; color: #92400e; }
+        .error { background: #fee2e2; color: #b91c1c; }
         .tombol-cek {
             margin-top: 15px;
             padding: 10px 18px;
@@ -109,16 +136,24 @@
             cursor: pointer;
             font-size: 15px;
         }
-
-        .tombol-cek:hover {
-            background: #1d4ed8;
-        }
+        .tombol-cek:hover { background: #1d4ed8; }
     </style>
 </head>
 <body>
 
 <div class="wadah">
-    <h1>📅 Cek Hari Libur</h1>
+    <!-- ✅ LOGO: Ambil dari folder asset/logo.png di beranda -->
+    <div class="logo-posisi">
+        <img class="logo-gambar" src="asset/logo.png" alt="Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <p style="display:none; color:#2563eb; font-weight:bold; font-size:18px;">📅 Cek Hari Libur</p>
+    </div>
+
+    <!-- ✅ SAMPUL: Ambil dari folder asset/sampul.jpg di beranda -->
+    <div class="bagian-sampul">
+        <div class="sampul-transparan">
+            <h1>📅 Jadwal & Hari Libur</h1>
+        </div>
+    </div>
 
     <div class="info-tanggal">
         <p><strong>Hari Ini:</strong> <span id="hari-ini"></span></p>
@@ -134,59 +169,43 @@
 </div>
 
 <script>
-// ==============================================
-// ✅ PERBAIKAN 2: Pengaturan & Konfigurasi API
-// ==============================================
-// ⚙️ BAGIAN INI YANG BISA KAMU UBAH KAPAN SAJA
+// ⚙️ PENGATURAN API
 const PENGATURAN = {
-    kodeNegara: 'ID', // Kode negara: ID = Indonesia
-    tahun: new Date().getFullYear(), // Bisa diubah ke tahun lain: misal 2027
-    bulan: new Date().getMonth() + 1, // Bulan 1-12, otomatis saat ini
-    // Sumber API: Gunakan API yang stabil dan gratis
+    kodeNegara: 'ID',
+    tahun: new Date().getFullYear(),
+    bulan: new Date().getMonth() + 1,
     apiUrl: 'https://date.nager.at/api/v3/PublicHolidays'
 };
 
-// Elemen halaman
 const elHariIni = document.getElementById('hari-ini');
 const elStatusHari = document.getElementById('status-hari');
 const elDaftarLibur = document.getElementById('daftar-hari-libur');
 
-// ==============================================
-// ✅ Fungsi: Tampilkan Tanggal Hari Ini
-// ==============================================
+// Tampilkan Tanggal Hari Ini
 function tampilkanTanggalHariIni() {
     const hari = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
     const bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
     const tgl = new Date();
-    const teks = `${hari[tgl.getDay()]}, ${tgl.getDate()} ${bulan[tgl.getMonth()]} ${tgl.getFullYear()}`;
-    elHariIni.textContent = teks;
+    elHariIni.textContent = `${hari[tgl.getDay()]}, ${tgl.getDate()} ${bulan[tgl.getMonth()]} ${tgl.getFullYear()}`;
 }
 
-// ==============================================
-// ✅ FUNGSI UTAMA: Ambil Data Hari Libur dari API
-// ==============================================
+// Ambil Data Hari Libur
 async function ambilDanTampilkanHariLibur() {
-    // Tampilkan pesan memuat
     elDaftarLibur.innerHTML = `<div class="pesan memuat">⏳ Sedang mengambil data hari libur...</div>`;
     elStatusHari.textContent = 'Mengecek...';
 
     try {
-        // 🔗 Pemanggilan API dengan parameter yang benar
         const url = `${PENGATURAN.apiUrl}/${PENGATURAN.tahun}/${PENGATURAN.kodeNegara}`;
         const respon = await fetch(url);
-
-        // ✅ Cek jika API bermasalah
         if (!respon.ok) throw new Error(`Kesalahan API: ${respon.status}`);
-
         const semuaLibur = await respon.json();
 
-        // ✅ Sederhanakan: Filter hanya bulan ini
+        // Filter bulan ini
         const liburBulanIni = semuaLibur.filter(libur => {
-            const bulanLibur = parseInt(libur.date.split('-')[1]);
-            return bulanLibur === PENGATURAN.bulan;
+            return parseInt(libur.date.split('-')[1]) === PENGATURAN.bulan;
         });
 
-        // ✅ Cek apakah hari ini libur
+        // Cek hari ini libur atau tidak
         const hariIniStr = new Date().toISOString().split('T')[0];
         const hariIniLibur = semuaLibur.find(libur => libur.date === hariIniStr);
 
@@ -198,7 +217,7 @@ async function ambilDanTampilkanHariLibur() {
             elStatusHari.style.color = '#16a34a';
         }
 
-        // ✅ Tampilkan daftar libur bulan ini
+        // Tampilkan daftar libur
         if (liburBulanIni.length === 0) {
             elDaftarLibur.innerHTML = `<p>Tidak ada hari libur bulan ini.</p>`;
             return;
@@ -209,41 +228,32 @@ async function ambilDanTampilkanHariLibur() {
             const tglPisah = libur.date.split('-');
             const formatTgl = `${tglPisah[2]}/${tglPisah[1]}/${tglPisah[0]}`;
             const kelas = libur.global ? 'libur-nasional' : 'libur-lain';
-            html += `
-                <li class="${kelas}">
-                    <strong>${formatTgl}</strong> — ${libur.localName || libur.name}
-                    ${!libur.global ? '<small>(Libur Sebagian)</small>' : ''}
-                </li>`;
+            html += `<li class="${kelas}">
+                <strong>${formatTgl}</strong> — ${libur.localName || libur.name}
+                ${!libur.global ? '<small>(Libur Sebagian)</small>' : ''}
+            </li>`;
         });
         html += `</ul>`;
         elDaftarLibur.innerHTML = html;
 
     } catch (kesalahan) {
-        // ✅ Penanganan error yang jelas
-        elDaftarLibur.innerHTML = `
-            <div class="pesan error">
-                ❌ Gagal memuat data hari libur.<br>
-                Alasan: ${kesalahan.message}<br>
-                💡 Cek koneksi internet atau pengaturan API.
-            </div>`;
+        elDaftarLibur.innerHTML = `<div class="pesan error">
+            ❌ Gagal memuat data hari libur.<br>
+            Alasan: ${kesalahan.message}
+        </div>`;
         elStatusHari.textContent = 'Gagal mengecek';
         elStatusHari.style.color = '#b91c1c';
         console.error('Kesalahan API Hari Libur:', kesalahan);
     }
 }
 
-// ==============================================
-// ✅ Fitur Baru: Cek Ulang Secara Manual
-// ==============================================
+// Cek Ulang
 function cekHariLiburLagi() {
     PENGATURAN.tahun = new Date().getFullYear();
     PENGATURAN.bulan = new Date().getMonth() + 1;
     ambilDanTampilkanHariLibur();
 }
 
-// ==============================================
-// Jalankan Saat Halaman Selesai Dimuat
-// ==============================================
 document.addEventListener('DOMContentLoaded', () => {
     tampilkanTanggalHariIni();
     ambilDanTampilkanHariLibur();
