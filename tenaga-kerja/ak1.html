@@ -17,10 +17,7 @@
             --warna-libur: #dc2626;
             --warna-teks: #1f2937;
 
-            /* ================================================= */
-            /* ✅ LANGSUNG PAKAI FOLDER ASSET DI BERANDA        */
-            /* Jalur sama persis seperti halaman utamamu       */
-            /* ================================================= */
+            /* ✅ Pakai folder asset di BERANDA — sama seperti halaman lain */
             --gambar-sampul: url('asset/sampul.jpg');
             --gambar-latar: url('asset/latar.jpg');
         }
@@ -37,7 +34,7 @@
             line-height: 1.6;
             padding: 20px;
 
-            /* ✅ Latar belakang dari folder asset di beranda */
+            /* ✅ Latar belakang dari folder asset beranda */
             background-image: var(--gambar-latar);
             background-size: cover;
             background-position: center;
@@ -79,7 +76,7 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
-        /* ✅ Logo dari folder asset di beranda */
+        /* ✅ Logo dari folder asset beranda */
         .logo-posisi {
             text-align: center;
             margin-bottom: 15px;
@@ -122,8 +119,9 @@
             border-color: #16a34a;
             color: #166534;
         }
-        .pesan { padding: 10px; border-radius: 6px; margin-top: 10px; }
+        .pesan { padding: 12px; border-radius: 6px; margin-top: 10px; }
         .memuat { background: #fef3c7; color: #92400e; }
+        .sukses { background: #f0fdf4; color: #166534; }
         .error { background: #fee2e2; color: #b91c1c; }
         .tombol-cek {
             margin-top: 15px;
@@ -142,13 +140,13 @@
 <body>
 
 <div class="wadah">
-    <!-- ✅ LOGO: Ambil dari folder asset/logo.png di beranda -->
+    <!-- ✅ LOGO dari folder asset beranda -->
     <div class="logo-posisi">
         <img class="logo-gambar" src="asset/logo.png" alt="Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
         <p style="display:none; color:#2563eb; font-weight:bold; font-size:18px;">📅 Cek Hari Libur</p>
     </div>
 
-    <!-- ✅ SAMPUL: Ambil dari folder asset/sampul.jpg di beranda -->
+    <!-- ✅ SAMPUL dari folder asset beranda -->
     <div class="bagian-sampul">
         <div class="sampul-transparan">
             <h1>📅 Jadwal & Hari Libur</h1>
@@ -157,31 +155,38 @@
 
     <div class="info-tanggal">
         <p><strong>Hari Ini:</strong> <span id="hari-ini"></span></p>
-        <p><strong>Status:</strong> <span id="status-hari"></span></p>
+        <p><strong>Status:</strong> <span id="status-hari">Sedang mengecek...</span></p>
     </div>
 
     <button class="tombol-cek" onclick="cekHariLiburLagi()">🔄 Cek Ulang Hari Libur</button>
 
     <h3>Daftar Hari Libur Bulan Ini</h3>
     <div id="daftar-hari-libur">
-        <div class="pesan memuat">Sedang memuat data hari libur...</div>
+        <div class="pesan memuat">⏳ Sedang mengambil data hari libur...</div>
     </div>
 </div>
 
 <script>
-// ⚙️ PENGATURAN API
+// ==============================================
+// ⚙️ PENGATURAN
+// ==============================================
 const PENGATURAN = {
     kodeNegara: 'ID',
     tahun: new Date().getFullYear(),
     bulan: new Date().getMonth() + 1,
-    apiUrl: 'https://date.nager.at/api/v3/PublicHolidays'
+    // ✅ GANTI API ke yang lebih kompatibel dengan AK1
+    apiUrl: 'https://api-harilibur.vercel.app/api',
+    // ⏳ Batas waktu tunggu: 8 detik → jika lambat, tampilkan pesan
+    batasWaktuDetik: 8
 };
 
 const elHariIni = document.getElementById('hari-ini');
 const elStatusHari = document.getElementById('status-hari');
 const elDaftarLibur = document.getElementById('daftar-hari-libur');
 
-// Tampilkan Tanggal Hari Ini
+// ==============================================
+// ✅ TAMPILKAN TANGGAL HARI INI
+// ==============================================
 function tampilkanTanggalHariIni() {
     const hari = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
     const bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
@@ -189,37 +194,50 @@ function tampilkanTanggalHariIni() {
     elHariIni.textContent = `${hari[tgl.getDay()]}, ${tgl.getDate()} ${bulan[tgl.getMonth()]} ${tgl.getFullYear()}`;
 }
 
-// Ambil Data Hari Libur
+// ==============================================
+// ✅ FUNGSI UTAMA: AMBIL DATA HARI LIBUR
+// ==============================================
 async function ambilDanTampilkanHariLibur() {
     elDaftarLibur.innerHTML = `<div class="pesan memuat">⏳ Sedang mengambil data hari libur...</div>`;
-    elStatusHari.textContent = 'Mengecek...';
+    elStatusHari.textContent = 'Sedang mengecek...';
 
     try {
-        const url = `${PENGATURAN.apiUrl}/${PENGATURAN.tahun}/${PENGATURAN.kodeNegara}`;
-        const respon = await fetch(url);
-        if (!respon.ok) throw new Error(`Kesalahan API: ${respon.status}`);
-        const semuaLibur = await respon.json();
-
-        // Filter bulan ini
-        const liburBulanIni = semuaLibur.filter(libur => {
-            return parseInt(libur.date.split('-')[1]) === PENGATURAN.bulan;
+        // ⏳ Batasi waktu tunggu agar tidak berhenti diam
+        const pengaturWaktu = new Promise((_, reject) => {
+            setTimeout(() => reject(new Error('Data terlalu lama dimuat')), PENGATURAN.batasWaktuDetik * 1000);
         });
 
-        // Cek hari ini libur atau tidak
+        // 🔗 Ambil data dari API baru
+        const url = `${PENGATURAN.apiUrl}?year=${PENGATURAN.tahun}&country=${PENGATURAN.kodeNegara}`;
+        
+        // Lakukan pengambilan dengan batas waktu
+        const respon = await Promise.race([ fetch(url), pengaturWaktu ]);
+
+        if (!respon.ok) throw new Error(`Kesalahan: Kode ${respon.status}`);
+        
+        const semuaLibur = await respon.json();
+
+        // ✅ Filter hanya bulan ini
+        const liburBulanIni = semuaLibur.filter(libur => {
+            const bln = parseInt(libur.date.split('-')[1]);
+            return bln === PENGATURAN.bulan;
+        });
+
+        // ✅ Cek apakah hari ini libur
         const hariIniStr = new Date().toISOString().split('T')[0];
         const hariIniLibur = semuaLibur.find(libur => libur.date === hariIniStr);
 
         if (hariIniLibur) {
-            elStatusHari.textContent = `🎉 Hari Libur: ${hariIniLibur.localName}`;
+            elStatusHari.textContent = `🎉 Hari Libur: ${hariIniLibur.localName || hariIniLibur.name}`;
             elStatusHari.style.color = '#dc2626';
         } else {
             elStatusHari.textContent = 'Bukan Hari Libur ✅';
             elStatusHari.style.color = '#16a34a';
         }
 
-        // Tampilkan daftar libur
+        // ✅ Tampilkan daftar libur
         if (liburBulanIni.length === 0) {
-            elDaftarLibur.innerHTML = `<p>Tidak ada hari libur bulan ini.</p>`;
+            elDaftarLibur.innerHTML = `<div class="pesan sukses">✅ Tidak ada hari libur bulan ini.</div>`;
             return;
         }
 
@@ -237,23 +255,33 @@ async function ambilDanTampilkanHariLibur() {
         elDaftarLibur.innerHTML = html;
 
     } catch (kesalahan) {
+        // ❌ Tampilkan pesan kesalahan yang jelas
         elDaftarLibur.innerHTML = `<div class="pesan error">
             ❌ Gagal memuat data hari libur.<br>
-            Alasan: ${kesalahan.message}
+            Alasan: ${kesalahan.message}<br><br>
+            💡 <strong>Cara mengatasi:</strong><br>
+            1. Coba tekan tombol <strong>"Cek Ulang"</strong> di atas<br>
+            2. Jika tetap gagal, kemungkinan API diblokir oleh AK1<br>
+            3. Buka halaman ini di HP/Komputer biasa untuk memastikan kode berfungsi
         </div>`;
-        elStatusHari.textContent = 'Gagal mengecek';
+        elStatusHari.textContent = '❌ Gagal mengecek';
         elStatusHari.style.color = '#b91c1c';
-        console.error('Kesalahan API Hari Libur:', kesalahan);
+        console.error('Kesalahan API:', kesalahan);
     }
 }
 
-// Cek Ulang
+// ==============================================
+// ✅ CEK ULANG MANUAL
+// ==============================================
 function cekHariLiburLagi() {
     PENGATURAN.tahun = new Date().getFullYear();
     PENGATURAN.bulan = new Date().getMonth() + 1;
     ambilDanTampilkanHariLibur();
 }
 
+// ==============================================
+// ✅ JALANKAN SAAT HALAMAN SIAP
+// ==============================================
 document.addEventListener('DOMContentLoaded', () => {
     tampilkanTanggalHariIni();
     ambilDanTampilkanHariLibur();
