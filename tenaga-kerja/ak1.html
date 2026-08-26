@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jadwal & Hari Libur</title>
+    <title>Jadwal & Hari Libur Nasional Indonesia</title>
 
-    <!-- ✅ Font -->
+    <!-- Font dari Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -15,9 +15,11 @@
             --font-utama: 'Noto Sans Sans', 'Segoe UI', Roboto, sans-serif;
             --warna-utama: #2563eb;
             --warna-libur: #dc2626;
+            --warna-libur-bulan-ini: #b91c1c;
             --warna-teks: #1f2937;
+            --warna-latar-baru: #f3f4f6;
 
-            /* ✅ Pakai folder asset di BERANDA — sama seperti halaman lain */
+            /* ✅ Gambar dari folder ASSET di BERANDA — sama seperti halaman lain */
             --gambar-sampul: url('asset/sampul.jpg');
             --gambar-latar: url('asset/latar.jpg');
         }
@@ -33,16 +35,36 @@
             color: var(--warna-teks);
             line-height: 1.6;
             padding: 20px;
+            min-height: 100vh;
 
-            /* ✅ Latar belakang dari folder asset beranda */
+            /* Latar belakang dari folder asset */
             background-image: var(--gambar-latar);
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            background-color: #e5e7eb;
+            background-color: var(--warna-latar-baru);
         }
 
-        /* ✅ Bagian Sampul */
+        .wadah {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.96);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Logo di atas */
+        .logo-posisi {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .logo-gambar {
+            max-height: 70px;
+            max-width: 180px;
+        }
+
+        /* Bagian Sampul */
         .bagian-sampul {
             background-image: var(--gambar-sampul);
             background-size: cover;
@@ -56,34 +78,15 @@
             justify-content: center;
         }
         .sampul-transparan {
-            background: rgba(0,0,0,0.4);
+            background: rgba(0, 0, 0, 0.42);
             width: 100%;
             height: 100%;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.6);
-        }
-
-        .wadah {
-            max-width: 600px;
-            margin: 0 auto;
-            background: rgba(255,255,255,0.95);
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-
-        /* ✅ Logo dari folder asset beranda */
-        .logo-posisi {
-            text-align: center;
-            margin-bottom: 15px;
-        }
-        .logo-gambar {
-            max-height: 70px;
-            max-width: 180px;
+            color: #ffffff;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.6);
         }
 
         h1, h2, h3 {
@@ -91,12 +94,27 @@
             margin-bottom: 15px;
             color: var(--warna-utama);
         }
+        .bagian-sampul h1 {
+            color: #ffffff;
+            margin-bottom: 0;
+        }
 
         .info-tanggal {
             margin-bottom: 20px;
-            padding: 12px;
+            padding: 14px;
             background: #eff6ff;
             border-radius: 8px;
+        }
+        .info-tanggal p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+
+        h3 {
+            margin-top: 25px;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #e5e7eb;
         }
 
         .daftar-libur {
@@ -104,10 +122,11 @@
             margin-top: 10px;
         }
         .daftar-libur li {
-            padding: 10px 12px;
+            padding: 11px 14px;
             margin-bottom: 8px;
-            border-radius: 6px;
+            border-radius: 7px;
             border-left: 4px solid;
+            line-height: 1.5;
         }
         .libur-nasional {
             background: #fef2f2;
@@ -116,175 +135,217 @@
         }
         .libur-lain {
             background: #f0fdf4;
-            border-color: #16a34a;
+            border-color: #22c55e;
             color: #166534;
         }
-        .pesan { padding: 12px; border-radius: 6px; margin-top: 10px; }
-        .memuat { background: #fef3c7; color: #92400e; }
-        .sukses { background: #f0fdf4; color: #166534; }
-        .error { background: #fee2e2; color: #b91c1c; }
+        .hari-ini-libur {
+            background: #fef9c3;
+            border-color: #eab308;
+            color: #854d0e;
+            font-weight: 500;
+        }
+
+        .pesan {
+            padding: 12px;
+            border-radius: 7px;
+            margin-top: 10px;
+        }
+        .tidak-ada {
+            background: #f0fdf4;
+            color: #166534;
+        }
+
         .tombol-cek {
             margin-top: 15px;
             padding: 10px 18px;
             background: var(--warna-utama);
-            color: white;
+            color: #ffffff;
             border: none;
-            border-radius: 6px;
+            border-radius: 7px;
             font-family: inherit;
-            cursor: pointer;
             font-size: 15px;
+            cursor: pointer;
+            transition: background 0.2s;
         }
-        .tombol-cek:hover { background: #1d4ed8; }
+        .tombol-cek:hover {
+            background: #1d4ed8;
+        }
+
+        small {
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body>
 
 <div class="wadah">
-    <!-- ✅ LOGO dari folder asset beranda -->
+
+    <!-- Logo dari folder asset -->
     <div class="logo-posisi">
         <img class="logo-gambar" src="asset/logo.png" alt="Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-        <p style="display:none; color:#2563eb; font-weight:bold; font-size:18px;">📅 Cek Hari Libur</p>
+        <p style="display:none; color:#2563eb; font-weight:bold; font-size:18px;">📅 Jadwal Hari Libur</p>
     </div>
 
-    <!-- ✅ SAMPUL dari folder asset beranda -->
+    <!-- Sampul dari folder asset -->
     <div class="bagian-sampul">
         <div class="sampul-transparan">
             <h1>📅 Jadwal & Hari Libur</h1>
         </div>
     </div>
 
+    <!-- Info Hari Ini -->
     <div class="info-tanggal">
-        <p><strong>Hari Ini:</strong> <span id="hari-ini"></span></p>
-        <p><strong>Status:</strong> <span id="status-hari">Sedang mengecek...</span></p>
+        <p><strong>📆 Hari Ini:</strong> <span id="hari-ini"></span></p>
+        <p><strong>🔍 Status:</strong> <span id="status-hari">Sedang mengecek...</span></p>
     </div>
 
-    <button class="tombol-cek" onclick="cekHariLiburLagi()">🔄 Cek Ulang Hari Libur</button>
+    <button class="tombol-cek" onclick="muatUlangData()">🔄 Muat Ulang Data</button>
 
-    <h3>Daftar Hari Libur Bulan Ini</h3>
+    <!-- Daftar Hari Libur -->
+    <h3>📋 Daftar Hari Libur Bulan Ini</h3>
     <div id="daftar-hari-libur">
-        <div class="pesan memuat">⏳ Sedang mengambil data hari libur...</div>
+        <p style="padding:10px;">Sedang menyiapkan data...</p>
     </div>
+
 </div>
 
 <script>
-// ==============================================
-// ⚙️ PENGATURAN
-// ==============================================
+// ==========================================================
+// ⚙️ PENGATURAN — UBAH BULAN ATAU TAHUN DI SINI SAJA
+// ==========================================================
 const PENGATURAN = {
-    kodeNegara: 'ID',
     tahun: new Date().getFullYear(),
-    bulan: new Date().getMonth() + 1,
-    // ✅ GANTI API ke yang lebih kompatibel dengan AK1
-    apiUrl: 'https://api-harilibur.vercel.app/api',
-    // ⏳ Batas waktu tunggu: 8 detik → jika lambat, tampilkan pesan
-    batasWaktuDetik: 8
+    bulan: new Date().getMonth() + 1
 };
 
+// ==========================================================
+// 📅 DAFTAR HARI LIBUR NASIONAL INDONESIA TAHUN 2026
+// Jika tahun berubah, cukup perbarui daftar di bawah ini
+// ==========================================================
+const DAFTAR_LIBUR = [
+    // Januari
+    { tanggal: '2026-01-01', nama: 'Tahun Baru Masehi', jenis: 'nasional' },
+    { tanggal: '2026-01-29', nama: 'Tahun Baru Imlek 2577 Kongzili', jenis: 'nasional' },
+    // Februari
+    { tanggal: '2026-02-17', nama: 'Isra Mikraj Nabi Muhammad SAW', jenis: 'nasional' },
+    // Maret
+    { tanggal: '2026-03-17', nama: 'Hari Raya Nyepi / Tahun Baru Saka 1948', jenis: 'nasional' },
+    { tanggal: '2026-03-18', nama: 'Hari Setelah Hari Raya Nyepi', jenis: 'nasional' },
+    // April
+    { tanggal: '2026-04-02', nama: 'Wafat Isa Almasih', jenis: 'nasional' },
+    { tanggal: '2026-04-04', nama: 'Hari Paskah', jenis: 'nasional' },
+    { tanggal: '2026-04-10', nama: 'Kenaikan Isa Almasih', jenis: 'nasional' },
+    // Mei
+    { tanggal: '2026-05-01', nama: 'Hari Buruh Internasional', jenis: 'nasional' },
+    { tanggal: '2026-05-07', nama: 'Hari Raya Waisak 2570 BE', jenis: 'nasional' },
+    { tanggal: '2026-05-14', nama: 'Kenaikan Nabi Muhammad SAW / Idul Fitri', jenis: 'nasional' },
+    { tanggal: '2026-05-15', nama: 'Hari Kedua Idul Fitri', jenis: 'nasional' },
+    // Juni
+    { tanggal: '2026-06-01', nama: 'Hari Lahir Pancasila', jenis: 'nasional' },
+    // Juli
+    { tanggal: '2026-07-20', nama: 'Hari Raya Idul Adha', jenis: 'nasional' },
+    { tanggal: '2026-07-21', nama: 'Hari Kedua Idul Adha', jenis: 'nasional' },
+    // Agustus
+    { tanggal: '2026-08-17', nama: 'Hari Kemerdekaan RI', jenis: 'nasional' },
+    { tanggal: '2026-08-28', nama: 'Tahun Baru Islam 1448 Hijriah', jenis: 'nasional' },
+    // September
+    { tanggal: '2026-09-24', nama: 'Maulid Nabi Muhammad SAW', jenis: 'nasional' },
+    // Desember
+    { tanggal: '2026-12-25', nama: 'Hari Raya Natal', jenis: 'nasional' }
+];
+
+// Elemen halaman
 const elHariIni = document.getElementById('hari-ini');
 const elStatusHari = document.getElementById('status-hari');
 const elDaftarLibur = document.getElementById('daftar-hari-libur');
 
-// ==============================================
+// ==========================================================
 // ✅ TAMPILKAN TANGGAL HARI INI
-// ==============================================
+// ==========================================================
 function tampilkanTanggalHariIni() {
-    const hari = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
-    const bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-    const tgl = new Date();
-    elHariIni.textContent = `${hari[tgl.getDay()]}, ${tgl.getDate()} ${bulan[tgl.getMonth()]} ${tgl.getFullYear()}`;
+    const namaHari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+    const namaBulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+    const sekarang = new Date();
+    elHariIni.textContent = `${namaHari[sekarang.getDay()]}, ${sekarang.getDate()} ${namaBulan[sekarang.getMonth()]} ${sekarang.getFullYear()}`;
 }
 
-// ==============================================
-// ✅ FUNGSI UTAMA: AMBIL DATA HARI LIBUR
-// ==============================================
-async function ambilDanTampilkanHariLibur() {
-    elDaftarLibur.innerHTML = `<div class="pesan memuat">⏳ Sedang mengambil data hari libur...</div>`;
-    elStatusHari.textContent = 'Sedang mengecek...';
+// ==========================================================
+// ✅ CEK HARI INI LIBUR ATAU TIDAK
+// ==========================================================
+function cekStatusHariIni() {
+    const hariIniStr = new Date().toISOString().split('T')[0];
+    const libur = DAFTAR_LIBUR.find(item => item.tanggal === hariIniStr);
 
-    try {
-        // ⏳ Batasi waktu tunggu agar tidak berhenti diam
-        const pengaturWaktu = new Promise((_, reject) => {
-            setTimeout(() => reject(new Error('Data terlalu lama dimuat')), PENGATURAN.batasWaktuDetik * 1000);
-        });
-
-        // 🔗 Ambil data dari API baru
-        const url = `${PENGATURAN.apiUrl}?year=${PENGATURAN.tahun}&country=${PENGATURAN.kodeNegara}`;
-        
-        // Lakukan pengambilan dengan batas waktu
-        const respon = await Promise.race([ fetch(url), pengaturWaktu ]);
-
-        if (!respon.ok) throw new Error(`Kesalahan: Kode ${respon.status}`);
-        
-        const semuaLibur = await respon.json();
-
-        // ✅ Filter hanya bulan ini
-        const liburBulanIni = semuaLibur.filter(libur => {
-            const bln = parseInt(libur.date.split('-')[1]);
-            return bln === PENGATURAN.bulan;
-        });
-
-        // ✅ Cek apakah hari ini libur
-        const hariIniStr = new Date().toISOString().split('T')[0];
-        const hariIniLibur = semuaLibur.find(libur => libur.date === hariIniStr);
-
-        if (hariIniLibur) {
-            elStatusHari.textContent = `🎉 Hari Libur: ${hariIniLibur.localName || hariIniLibur.name}`;
-            elStatusHari.style.color = '#dc2626';
+    if (libur) {
+        elStatusHari.textContent = `🎉 Hari Libur Nasional: ${libur.nama}`;
+        elStatusHari.style.color = '#b91c1c';
+    } else {
+        const hariMinggu = new Date().getDay();
+        if (hariMinggu === 0) {
+            elStatusHari.textContent = '😊 Hari Minggu (Libur Pekan)';
+            elStatusHari.style.color = '#b45309';
         } else {
-            elStatusHari.textContent = 'Bukan Hari Libur ✅';
+            elStatusHari.textContent = '✅ Bukan Hari Libur Nasional';
             elStatusHari.style.color = '#16a34a';
         }
-
-        // ✅ Tampilkan daftar libur
-        if (liburBulanIni.length === 0) {
-            elDaftarLibur.innerHTML = `<div class="pesan sukses">✅ Tidak ada hari libur bulan ini.</div>`;
-            return;
-        }
-
-        let html = `<ul class="daftar-libur">`;
-        liburBulanIni.forEach(libur => {
-            const tglPisah = libur.date.split('-');
-            const formatTgl = `${tglPisah[2]}/${tglPisah[1]}/${tglPisah[0]}`;
-            const kelas = libur.global ? 'libur-nasional' : 'libur-lain';
-            html += `<li class="${kelas}">
-                <strong>${formatTgl}</strong> — ${libur.localName || libur.name}
-                ${!libur.global ? '<small>(Libur Sebagian)</small>' : ''}
-            </li>`;
-        });
-        html += `</ul>`;
-        elDaftarLibur.innerHTML = html;
-
-    } catch (kesalahan) {
-        // ❌ Tampilkan pesan kesalahan yang jelas
-        elDaftarLibur.innerHTML = `<div class="pesan error">
-            ❌ Gagal memuat data hari libur.<br>
-            Alasan: ${kesalahan.message}<br><br>
-            💡 <strong>Cara mengatasi:</strong><br>
-            1. Coba tekan tombol <strong>"Cek Ulang"</strong> di atas<br>
-            2. Jika tetap gagal, kemungkinan API diblokir oleh AK1<br>
-            3. Buka halaman ini di HP/Komputer biasa untuk memastikan kode berfungsi
-        </div>`;
-        elStatusHari.textContent = '❌ Gagal mengecek';
-        elStatusHari.style.color = '#b91c1c';
-        console.error('Kesalahan API:', kesalahan);
     }
 }
 
-// ==============================================
-// ✅ CEK ULANG MANUAL
-// ==============================================
-function cekHariLiburLagi() {
-    PENGATURAN.tahun = new Date().getFullYear();
-    PENGATURAN.bulan = new Date().getMonth() + 1;
-    ambilDanTampilkanHariLibur();
+// ==========================================================
+// ✅ TAMPILKAN DAFTAR LIBUR BULAN INI
+// ==========================================================
+function tampilkanDaftarLibur() {
+    const bulanIni = String(PENGATURAN.bulan).padStart(2, '0');
+    const tahunIni = PENGATURAN.tahun;
+
+    // Filter hanya bulan ini
+    const liburBulanIni = DAFTAR_LIBUR.filter(item => {
+        const [thn, bln] = item.tanggal.split('-');
+        return thn === String(tahunIni) && bln === bulanIni;
+    });
+
+    const hariIniStr = new Date().toISOString().split('T')[0];
+
+    if (liburBulanIni.length === 0) {
+        elDaftarLibur.innerHTML = `<p class="pesan tidak-ada">✅ Tidak ada hari libur nasional bulan ini.</p>`;
+        return;
+    }
+
+    let html = `<ul class="daftar-libur">`;
+    liburBulanIni.forEach(item => {
+        const [thn, bln, tgl] = item.tanggal.split('-');
+        const formatTgl = `${tgl}/${bln}/${thn}`;
+
+        // Tandai hari ini
+        const kelas = item.tanggal === hariIniStr
+            ? 'hari-ini-libur'
+            : (item.jenis === 'nasional' ? 'libur-nasional' : 'libur-lain');
+
+        html += `<li class="${kelas}">
+            <strong>${formatTgl}</strong> — ${item.nama}
+            ${item.tanggal === hariIniStr ? '<br><small>👈 Hari Ini!</small>' : ''}
+        </li>`;
+    });
+    html += `</ul>`;
+    elDaftarLibur.innerHTML = html;
 }
 
-// ==============================================
-// ✅ JALANKAN SAAT HALAMAN SIAP
-// ==============================================
-document.addEventListener('DOMContentLoaded', () => {
+// ==========================================================
+// ✅ MULAI ULANG / MUAT ULANG DATA
+// ==========================================================
+function muatUlangData() {
+    PENGATURAN.tahun = new Date().getFullYear();
+    PENGATURAN.bulan = new Date().getMonth() + 1;
     tampilkanTanggalHariIni();
-    ambilDanTampilkanHariLibur();
+    cekStatusHariIni();
+    tampilkanDaftarLibur();
+}
+
+// ==========================================================
+// ✅ JALANKAN SAAT HALAMAN DIBUKA
+// ==========================================================
+document.addEventListener('DOMContentLoaded', () => {
+    muatUlangData();
 });
 </script>
 </body>
